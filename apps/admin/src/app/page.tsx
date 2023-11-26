@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Card } from "ui";
 
-
+// const menus = ["About Us", "How it Works", "Our Medical Experts", "Reviews"];
 function Gradient({
   conic,
   className,
@@ -135,6 +135,7 @@ export default function Page(): JSX.Element {
             {description}
           </Card>
         ))}
+      
       </div>
     </main>
   );

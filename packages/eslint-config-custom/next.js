@@ -43,5 +43,6 @@ module.exports = {
     "import/no-default-export": "off",
     'no-console': 'off',
     '@typescript-eslint/no-confusing-void-expression': 'off',
+    'camelcase': 'off',
   },
 };

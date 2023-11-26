@@ -1,6 +1,6 @@
 {
   "name": "ui", 
-  "version": "0.0.0", 
+  "version": "0.0.0",
   "sideEffects": [
     "**/*.css"
   ],
@@ -29,6 +29,7 @@
     "tailwind-config": "*",
     "tailwindcss": "^3.2.4",
     "tsconfig": "*",
+    "tw-elements": "^1.0.0-beta1",
     "tsup": "^6.0.1",
     "typescript": "^5.2.2"
   }
