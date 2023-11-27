@@ -10,6 +10,23 @@
     ".": "./dist",
     "./styles.css": "./dist/index.css"
   },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/index.tsx"
+      ]
+    }
+  },
+  "publishConfig": {
+    "typesVersions": {
+      "*": {
+        "*": [
+          "./dist/*.d.ts",
+          "./dist/*/index.d.ts"
+        ]
+      }
+    }
+  },
   "license": "MIT",
   "scripts": {
     "build": "tsup",
