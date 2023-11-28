@@ -1,5 +1,6 @@
-
+import { useSiteWideContext } from "../../context"
 export default function Header ({children}:{children: React.ReactNode}):JSX.Element {
+  const {toggleHomeModal} = useSiteWideContext();
     return(  
       <div className="w-full fixed top-0 left-0">
     <nav
@@ -57,12 +58,7 @@ export default function Header ({children}:{children: React.ReactNode}):JSX.Elem
           </a>
           <button
             className="hover:bg-gray-100 text-gray-700 text-sm font-bold py-2 px-4 rounded-full"
-            type="button"
-            data-te-offcanvas-toggle
-            data-te-target="#offcanvasRight"
-            aria-controls="offcanvasRight"
-            data-te-ripple-init
-            data-te-ripple-color="light"
+            onClick={()=>{toggleHomeModal()}}
           >
             <svg
               className="w-6 h-6"

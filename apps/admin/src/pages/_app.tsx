@@ -1,27 +1,22 @@
-import "../globals.css";
+import "../styles/globals.css";
 import "ui/styles.css";
 import type { AppProps } from "next/app";
-import { useEffect } from "react";
 import Layout from "../components/shared/layout";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
+import { SiteWideContextProvider } from "../context";
+import { DarkThemeToggle, Flowbite } from 'flowbite-react';
 
 
 function App({ Component, pageProps }:  AppProps<{ session: Session }>) {
 
-
-  useEffect(() => {
-    const use = async () => {
-      (await import("tw-elements")).default;
-    };
-    use();
-  }, []);
-
   return (
     <SessionProvider session={pageProps.session}>
+      <SiteWideContextProvider>
       <Layout>
         <Component {...pageProps}/>
       </Layout>
+      </SiteWideContextProvider>
       </SessionProvider>
    
 )}
