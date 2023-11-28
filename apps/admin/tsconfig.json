@@ -8,8 +8,10 @@
     ],
     "strictNullChecks": true
   },
+  
   "include": [
     "next-env.d.ts",
+    "global.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"

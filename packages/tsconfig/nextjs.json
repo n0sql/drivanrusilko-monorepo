@@ -15,6 +15,6 @@
     "strict": false,
     "target": "ES6"
   },
-  "include": ["src", "next-env.d.ts"],
+  "include": ["src", "next-env.d.ts","global.d.ts"],
   "exclude": ["node_modules"]
 }
