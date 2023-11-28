@@ -1,23 +1,29 @@
-import * as React from 'react'
 
-export function Drawer({toggleView}:{ toggleView: (view:string)=>void}):JSX.Element 
+import React from "react";
+
+export default function Drawer({toggleView}:{ toggleView: (view:string)=>void}):JSX.Element 
 {
     return (
     <div className="flex flex-col  justify-between mylist ">
       <ul className=" list-none px-6 space-y-2 flex flex-col ">
         {/* <div className="flex flex-col mb-6 gap-5"> */}
         <li
+        
           className="flex justify-between items-center  w-full hover:bg-[#FFFFFF1C] rounded-xl px-2 lg:h-32 cursor-pointer"
-          onClick={() => {
-            toggleView('treatment')
-          }}
+          
         >
+            <button
+            type="button"
+            onClick={() => {
+                toggleView('treatment')
+              }}
+            >
           <div className="flex flex-col items-start ">
             <h1 className="text-gray-300 font-semibold text-xl ">Explore treatments</h1>
             <p className="text-[#FFFFFFA8] text-sm ">Proven treatments for dozen of conditions</p>
           </div>
           <div className="flex items-center">
-            <button className=" text-gray-300 text-sm font-bold py-2 px-4 rounded-full  ">
+            <button type="button" className=" text-gray-300 text-sm font-bold py-2 px-4 rounded-full  ">
               {/* right arrow */}
               <svg
                 className="w-6 h-6 "
@@ -34,14 +40,16 @@ export function Drawer({toggleView}:{ toggleView: (view:string)=>void}):JSX.Elem
               </svg>
             </button>
           </div>
+          </button>
         </li>
 
         <li
           className="flex justify-between items-center     hover:bg-[#FFFFFF1C]  rounded-xl px-2 lg:h-32   cursor-pointer"
-          onClick={() => {
-            toggleView('main')
-          }}
+          
         >
+            <button type='button' onClick={() => {
+            toggleView('main')
+          }}>
           <div className="flex flex-col items-start ">
             <h1 className="text-gray-300 font-semibold   text-xl">Shop products</h1>
             <p className="text-[#FFFFFFA8] text-sm">
@@ -50,7 +58,7 @@ export function Drawer({toggleView}:{ toggleView: (view:string)=>void}):JSX.Elem
           </div>
 
           <div className="flex items-center">
-            <button className="text-gray-300 text-sm font-bold py-2 px-4 rounded-full  ">
+            <button type="button" className="text-gray-300 text-sm font-bold py-2 px-4 rounded-full  ">
               {/* right arrow */}
               <svg
                 className="w-6"
@@ -67,13 +75,21 @@ export function Drawer({toggleView}:{ toggleView: (view:string)=>void}):JSX.Elem
               </svg>
             </button>
           </div>
+          </button>
         </li>
+        
         <li
           className="flex justify-between items-center  hover:bg-[#FFFFFF1C] rounded-xl px-2 lg:h-32  cursor-pointer"
-          onClick={() => {
-            toggleView('meet')
-          }}
+         
         >
+            <button
+            type="button"
+             onClick={() => {
+                toggleView('meet')
+              }}
+            >
+
+            
           <div className="flex flex-col items-start">
             <h1 className="text-gray-300 font-semibold  text-xl ">Meet Drivanrusilko</h1>
             <p className="text-[#FFFFFFA8] text-sm ">
@@ -81,7 +97,7 @@ export function Drawer({toggleView}:{ toggleView: (view:string)=>void}):JSX.Elem
             </p>
           </div>
           <div className="flex items-center">
-            <button className="text-gray-300 text-sm font-bold py-2 px-4 rounded-full  shadow shadow-lg uppercase">
+            <button type="button" className="text-gray-300 text-sm font-bold py-2 px-4 rounded-full  shadow shadow-lg uppercase">
               {/* right arrow */}
               <svg
                 className="w-6"
@@ -98,6 +114,7 @@ export function Drawer({toggleView}:{ toggleView: (view:string)=>void}):JSX.Elem
               </svg>
             </button>
           </div>
+          </button>
         </li>
         {/* </div> */}
       </ul>
@@ -108,7 +125,7 @@ export function Drawer({toggleView}:{ toggleView: (view:string)=>void}):JSX.Elem
         <h4 className="text-gray-300 font-semibold lg:text-2xl text-sm">
           Start a free consultation
         </h4>
-        <button className="text-gray-300 text-sm py-2">
+        <button type="button" className="text-gray-300 text-sm py-2">
           <svg
             className="w-6 h-6 pl-1 bg-white rounded-full text-primary"
             aria-hidden="true"

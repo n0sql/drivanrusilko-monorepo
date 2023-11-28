@@ -1,6 +1,11 @@
+import React from "react";
+import dynamic from 'next/dynamic';
 import Image from "next/image";
-import { Card } from "ui";
 
+
+const DynamicCard = dynamic(() => import('ui').then((mod) => mod.Card), {
+  ssr: false, // This will disable server-side rendering for the Card component.
+});
 // const menus = ["About Us", "How it Works", "Our Medical Experts", "Reviews"];
 function Gradient({
   conic,
@@ -19,6 +24,7 @@ function Gradient({
     />
   );
 }
+
 
 
 const LINKS = [
@@ -44,11 +50,39 @@ const LINKS = [
       " Instantly deploy your Turborepo to a shareable URL with Vercel.",
   },
 ];
+export default function HomePage():JSX.Element{
 
-export default function Page(): JSX.Element {
- 
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+
+    return(
+        <div className="">
+           
+            
+         
+      <div className="flex  lg:flex-nowrap flex-wrap items-start justify-around">
+        <div className="flex flex-col mb-12 lg:-mt-3">
+          <h1 className="text-primary">Personalized, doctor-backed</h1>
+          <h1 className="text-[#8f8f8f]">treatment plans</h1>
+        </div>
+
+        <div className="flex flex-col text-gray-200 gap-5 ">
+          <p className="text-[#8f8f8f]">
+            Finding what works can be hard. Our online process and <br /> medical experts make it
+            simple.
+          </p>
+
+          <button
+          
+            data-te-offcanvas-toggle
+            data-te-target="#offcanvasTreatment"
+            aria-controls="offcanvasTreatment"
+            data-te-ripple-init
+            data-te-ripple-color="light"
+            className="px-4 py-2 bg-primary rounded-full  lg:w-48  text-center w-full mb-6"
+          >
+            Find my treatment
+          </button>
+        </div>
+      </div>
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed px-4 left-0 top-0 flex w-full justify-center border-b bg-gradient-to-b pb-6 pt-8 backdrop-blur-2xl border-neutral-800 bg-zinc-800/30 from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:bg-zinc-800/30">
           examples/with-tailwind -&nbsp;
@@ -128,15 +162,15 @@ export default function Page(): JSX.Element {
           </div>
         </div>
       </div>
-
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+      
         {LINKS.map(({ title, href, description }) => (
-          <Card href={href} key={title} title={title}>
+          < DynamicCard href={href} key={title} title={title}>
             {description}
-          </Card>
+          </ DynamicCard>
         ))}
       
       </div>
-    </main>
-  );
+    </div>
+    )
 }

@@ -1,17 +1,16 @@
-import * as React from 'react'
-import Link from "next/link";
 
-export function Header ({children}:{children: React.ReactNode[]}):JSX.Element {
-    return(    
+export default function Header ({children}:{children: React.ReactNode}):JSX.Element {
+    return(  
+      <div className="w-full fixed top-0 left-0">
     <nav
         className="relative flex-wrap flex w-full items-center justify-center lg:justify-between bg-neutral-50 py-2 text-neutral-600 shadow-lg dark:bg-neutral-700 dark:text-neutral-300 dark:shadow-black/5 lg:justify-between "
         id="navbarSupportedContentX"
         data-te-navbar-ref
       >
-        {children[0]}
+       
        
         <div data-te-nav-item-ref>
-          <Link
+          <a
             data-te-ripple-init
             data-te-ripple-color="light"
             href="https://drivan.d3gmqotpidrz95.amplifyapp.com/"
@@ -21,7 +20,7 @@ export function Header ({children}:{children: React.ReactNode[]}):JSX.Element {
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               Drivanrusilko
             </span>
-          </Link>
+          </a>
         </div>
   
         <div
@@ -31,7 +30,7 @@ export function Header ({children}:{children: React.ReactNode[]}):JSX.Element {
         >
           <a
             className="flex text-sm  font-bold items-center bg-white whitespace-nowrap py-2 px-4 rounded-full shadow shadow-lg uppercase  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-4"
-            href="#"
+            href="/"
             data-te-ripple-init
             data-te-ripple-color="light"
             type="button"
@@ -88,10 +87,12 @@ export function Header ({children}:{children: React.ReactNode[]}):JSX.Element {
           >
             <div className="px-6 py-5 lg:px-8 h-[60vh] overflow-y-scroll">
               <div className="grid  gap-6 md:grid-cols-2 lg:grid-cols-6">
-                {children[1]}
+                {children}
               </div>
             </div>
           </div>
         </div>
-      </nav>)
+      </nav>
+      </div>  
+)
 }

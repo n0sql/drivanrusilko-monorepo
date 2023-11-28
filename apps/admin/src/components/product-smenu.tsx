@@ -1,6 +1,5 @@
-import * as React from 'react'
 
-export function ProductsMenu ({children}:{children: React.ReactNode}):JSX.Element
+export default function ProductsMenu ({children}:{children: React.ReactNode}):JSX.Element
 {
     return(
         <ul

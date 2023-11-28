@@ -1,30 +1,27 @@
-import * as React from 'react'
-import { Drawer } from './drawer';
-import { DrawerMenu } from './drawermenu';
-import { ProductsMenu } from './productsmenu';
-import { SiteMenu } from './sitemenu';
+import React from "react";
+import  Drawer  from './drawer';
+import { DrawerMenu } from './drawer-menu';
+import  ProductsMenu  from './product-smenu';
+import  SiteMenu  from './site-menu';
 
+export type Viewkey = 'main' | 'treatment' | 'shop' | 'meet';
 
-export type viewKey = 'main' | 'treatment' | 'shop' | 'meet';
-
-export function MainDrawer ({children}:{children: React.ReactNode[]}):JSX.Element
+export function MainDrawer ({data}:{data: any}):JSX.Element
 {
 
   const [mainView, setMainView] = React.useState(true);
   const [treatmentView, setTreatmentView] = React.useState(false);
   const [shopView, setShopView] = React.useState(false);
   const [meetView, setMeetView] = React.useState(false);
-  const toggleView =(view: string)=>{
+  const toggleView =(view: string):void=>{
    const views = {'main': setMainView, 'treatment': setTreatmentView, 'shop': setShopView, 'meet': setMeetView};
 
-   Object.keys(views).map((item:string) =>  item === view ? 
-   views[item as viewKey](true) 
-   : views[item as viewKey](false))
+   Object.keys(views).map((item:string) =>  item === view ? views[item as Viewkey](true) : views[item as Viewkey](false))
 
   }
     return (
         <div
-        className="invisible fixed bottom-0 top-0 right-0 z-[1045] flex  lg:w-[30vw] w-[90vw] md:w-[50vw]  translate-x-full flex-col text-neutral-700 shadow-sm outline-none transition  duration-500 ease-in-out dark:bg-neutral-800 dark:text-neutral-200 [&[data-te-offcanvas-show]]:transform-none "
+        className="bottom-0 top-0 right-0 z-[1045] flex  lg:w-[30vw] w-[90vw] md:w-[50vw]  translate-x-full flex-col text-neutral-700 shadow-sm outline-none transition  duration-500 ease-in-out dark:bg-neutral-800 dark:text-neutral-200 [&[data-te-offcanvas-show]]:transform-none"
         tabIndex={-1}
         id="offcanvasRight"
         aria-labelledby="offcanvasRight"
@@ -33,6 +30,7 @@ export function MainDrawer ({children}:{children: React.ReactNode[]}):JSX.Elemen
         <div className="absolute pt-3  w-full top-0 right-0 h-full  bg-black rounded-tl-3xl rounded-bl-3xl">
           <div className="flex items-center mb-5  mt-3 pl-6 justify-between  mybtns">
             <button
+            type='button'
               onClick={() => {
                toggleView('main');
               }}
@@ -74,6 +72,7 @@ export function MainDrawer ({children}:{children: React.ReactNode[]}):JSX.Elemen
                 <span className="block py-1 px-4  text-gray-300 text-sm"> Sign In </span>
               </button>
               <button
+              type='button'
                 data-te-offcanvas-dismiss
                 className=" text-gray-300 text-sm font-bold  px-4 rounded-full  shadow shadow-lg uppercase"
               >
@@ -97,18 +96,7 @@ export function MainDrawer ({children}:{children: React.ReactNode[]}):JSX.Elemen
             </div>
           </div>
   
-          {mainView ? (
-            <Drawer
-              toggleView={toggleView}
-            />
-          ) : treatmentView ? (
-            <DrawerMenu children={children[0]}/>
-          ) : shopView ? (
-            <ProductsMenu children={children[1]} />
-          ) : meetView ? (
-            <SiteMenu  menus={["About Us", "How it Works", "Our Medical Experts", "Reviews"]}/>
-          ) : null}
-        </div>
+          {mainView ? (<Drawer toggleView={toggleView}/> ) : treatmentView ? (<DrawerMenu>{data[0]}</DrawerMenu>) : shopView ? ( <ProductsMenu >{data[1]}</ProductsMenu> ) : meetView ? ( <SiteMenu  menus={["About Us", "How it Works", "Our Medical Experts", "Reviews"]}/> ) : null} </div>
       </div> 
-        )
+)
 }

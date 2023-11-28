@@ -1,5 +1,5 @@
-import * as React from "react"
 
+import React from "react";
 export function DrawerMenu({children}:{children:React.ReactNode}):JSX.Element{
     return(
         <ul

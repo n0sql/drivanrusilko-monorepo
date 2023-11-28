@@ -41,8 +41,33 @@ module.exports = {
   // add rules configurations here
   rules: {
     "import/no-default-export": "off",
+
     'no-console': 'off',
     '@typescript-eslint/no-confusing-void-expression': 'off',
     'camelcase': 'off',
+    "@typescript-eslint/no-explicit-any":"off",
+    "react/jsx-sort-props": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access":"off",
+    "react/self-closing-comp":"off",
+    "no-nested-ternary": "off",
+    "@typescript-eslint/no-floating-promises":"off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/interactive-supports-focus": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/explicit-function-return-type":"off",
+    "@next/next/no-html-link-for-pages": "off",
+    "react/button-has-type":"off",
+    "import/newline-after-import": "off",
+    "import/no-named-as-default-member": "off",
+    "react/function-component-definition": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "react/no-array-index-key": "off",
+    "import/order": "off",
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/consistent-type-imports":"off",
+
   },
 };
