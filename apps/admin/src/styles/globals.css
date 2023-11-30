@@ -27,13 +27,3 @@ body {
 }
 
 
-.mylist{
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-/* hide scrollbar in #sidenav-2 */
-
-.mylist::-webkit-scrollbar {
-  display: none;
-}

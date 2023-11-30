@@ -27,12 +27,12 @@ interface SiteWideContextType {
 
  export const SiteWideContextProvider =({children}: {children: React.ReactNode}) => {
 
-    const [mainView, setMainView] = useState<boolean>(true);
+    const [mainView, setMainView] = useState<boolean>(false);
     const [treatmentView, setTreatmentView] = useState<boolean>(false);
     const [shopView, setShopView] = useState<boolean>(false);
     const [meetView, setMeetView] = useState<boolean>(false);
     
-    const [openHomeModal, setOpenHomeModal] = useState<boolean>(true);
+    const [openHomeModal, setOpenHomeModal] = useState<boolean>(false);
     const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
     const [view, setView]  =  useState<string>('main')
 

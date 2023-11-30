@@ -161,7 +161,7 @@ const MainDrawer = () => {
   return (
 
      
-      <Modal size={"2xl"} className='min-h screen rounded-tl-3xl  rounded-bl-3xl' position={'top-right'} dismissible show={openHomeModal} onClose={() => toggleHomeModal()}>
+      <Modal size={"2xl"} className='absolute z-50 transition-all delay-1000 rounded-tl-3xl  rounded-bl-3xl' position={'top-right'} dismissible show={openHomeModal} onClose={() => toggleHomeModal()}>
         <Modal.Header className=" dark:bg-slate-300">
         <div className="flex  items-center py-4 justify-between  mybtns">
           <Button
@@ -193,7 +193,7 @@ const MainDrawer = () => {
         </div>
 
         </Modal.Header>
-        <Modal.Body className="bg-black">
+        <Modal.Body className="bg-black min-h-[82vh] h-full transition-all">
         {mainView ? (
           <Drawer
            
