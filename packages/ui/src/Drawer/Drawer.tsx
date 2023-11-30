@@ -21,8 +21,8 @@ export const MainDrawer = ({useSiteWideContext, menus, products, classNam}:{useS
   return (
 
       
-      <Drawer size={600} className={`${classNam} ui-overflow-hidden rounded-tl-3xl rounded-bl-3xl` } placement="right"  open={openHomeModal} onClose={() => toggleHomeModal()}>
-        <div className=" dark:bg-black">
+      <Drawer size={600} className={`${classNam} rounded-tl-3xl rounded-bl-3xl dark:bg-black` } placement="right"  open={openHomeModal} onClose={() => toggleHomeModal()}>
+        <div className=" dark:bg-black rounded-tl-3xl rounded-bl-3xl">
         <div className="flex  items-center py-4 justify-between  mybtns">
           <Button
             onClick={() => {
@@ -54,7 +54,6 @@ export const MainDrawer = ({useSiteWideContext, menus, products, classNam}:{useS
 
         </div>
         <div className="bg-gray-200 dark:bg-black min-h-[82vh]  h-full transition-all">
-          we right
         {mainView ? (
           <SmallDrawer
            useSiteWideContext={useSiteWideContext}

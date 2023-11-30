@@ -89,7 +89,13 @@ module.exports = {
     "@typescript-eslint/no-misused-promises":"off",
     "@typescript-eslint/no-non-null-assertion":"off",
     "@typescript-eslint/non-nullable-type-assertion-style":"off",
-    "import/no-absolute-path":"off"
+    "import/no-absolute-path":"off",
+    "react/jsx-no-leaked-render": "off",
+    "@next/next/no-sync-scripts":"off",
+    "react/jsx-curly-brace-presence":"off",
+    "react/hook-use-state":"off",
+    "react-hooks/exhaustive-deps":"off",
+    "object-shorthand":"off"
 
   },
 };

@@ -1,7 +1,5 @@
 import React from "react";
-import EditLabCategory from "./EditLabCategory";
-import LabCategoryDelete from "./LabCategoryDelete";
-import BetterPagination from "./BetterPagination";
+import { BetterPagination} from "ui";
 import DeleteLab from "./DeleteLab";
 import EditLab from "./EditLab";
 

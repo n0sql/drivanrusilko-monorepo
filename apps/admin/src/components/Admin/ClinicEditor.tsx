@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import FormInput from "../FormGeneratorComponents/FormInput";
+
 
 function ClinicEditor({ onSubmit, clinic }: any) {
   const [clinicname, setName] = useState(clinic.name);

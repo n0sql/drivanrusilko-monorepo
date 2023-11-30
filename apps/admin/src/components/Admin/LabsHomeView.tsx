@@ -1,8 +1,5 @@
 import React from "react";
-
 import { PlusSmallIcon } from "@heroicons/react/24/solid";
-import LabsTable from "./LabsTable";
-import LabCategoriesTable from "./LabCategoriesTable";
 import CreateLabCategory from "./CreateLabCategory";
 import Sometable2 from "./LabsTable";
 import Sometable from "./LabCategoriesTable";

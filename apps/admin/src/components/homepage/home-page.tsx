@@ -1,6 +1,7 @@
 import React from "react";
 import dynamic from 'next/dynamic';
 import Image from "next/image";
+import Button from "@material-tailwind/react/components/Button"
 const DynamicCard = dynamic(() => import('ui').then((mod) => mod.Card), {
   ssr: false, // This will disable server-side rendering for the Card component.
 });
@@ -52,12 +53,12 @@ export default function HomePage():JSX.Element{
 
 
     return(
-        <div className="">
+        <div className="mt-12">
            
             
          
-      <div className="flex  lg:flex-nowrap flex-wrap items-start justify-around">
-        <div className="flex flex-col mb-12 lg:-mt-3">
+      <div className="flex  lg:flex-row flex-col items-center lg:items-start justify-between">
+        <div className="flex flex-col mb-12">
           <h1 className="text-primary">Personalized, doctor-backed</h1>
           <h1 className="text-[#8f8f8f]">treatment plans</h1>
         </div>
@@ -69,17 +70,13 @@ export default function HomePage():JSX.Element{
             simple.
           </p>
 
-          <button
+          <Button
           
-            data-te-offcanvas-toggle
-            data-te-target="#offcanvasTreatment"
-            aria-controls="offcanvasTreatment"
-            data-te-ripple-init
-            data-te-ripple-color="light"
-            className="px-4 py-2 bg-primary rounded-full  lg:w-48  text-center w-full mb-6"
+           
+            className="px-4 py-2 bg-blue-800 rounded-full cursor-pointer  lg:w-48  text-center w-full mb-6"
           >
             Find my treatment
-          </button>
+          </Button>
         </div>
       </div>
       {/* <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -161,7 +158,7 @@ export default function HomePage():JSX.Element{
           </div>
         </div>
       </div>
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+      <div className="mb-32 grid text-center lg:max-w-5xl  lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
       
         {LINKS.map(({ title, href, description }) => (
           < DynamicCard href={href} key={title} title={title}>

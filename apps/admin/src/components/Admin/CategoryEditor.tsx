@@ -1,7 +1,7 @@
 import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
-import React, { useEffect, useState } from "react";
-import FormInput from "../FormGeneratorComponents/FormInput";
-import FormSelect from "../FormGeneratorComponents/FormSelect";
+import React, {  useState } from "react";
+import {FormInput, FormSelect} from "ui";
+
 
 const CategoryEditor = ({ onSubmit, data }: { onSubmit: any; data: any }) => {
   const [categories, setCategories] = useState<TreatmentCategory[]>([...data]);

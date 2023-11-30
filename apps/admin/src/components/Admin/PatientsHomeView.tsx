@@ -1,7 +1,6 @@
 import React from "react";
 
 import { PlusSmallIcon } from "@heroicons/react/24/solid";
-import PatientTable from "./PatientTable";
 import SomeTable5 from "./PatientTable";
 import { ArrowUpIcon } from "@heroicons/react/24/outline";
 const PatientsHomeView = ({ router }: any) => {

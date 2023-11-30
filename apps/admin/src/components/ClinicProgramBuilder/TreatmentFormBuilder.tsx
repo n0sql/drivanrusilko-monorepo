@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import FormInput from "../FormGeneratorComponents/FormInput";
 
 function FormBuilder({ onSubmit }: any) {
   const [name, setName] = useState("");

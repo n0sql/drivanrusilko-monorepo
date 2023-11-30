@@ -1,8 +1,7 @@
 import React from "react";
 import EditLabCategory from "./EditLabCategory";
-import LabCategoryDelete from "./LabCategoryDelete";
-import BetterPagination from "./BetterPagination";
 
+import {LabCategoryDelete, BetterPagination} from "ui";
 const Sometable = ({ categories }: any) => {
   const [filter, setFilter] = React.useState<string[]>([]);
 

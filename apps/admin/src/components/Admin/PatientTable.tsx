@@ -1,5 +1,5 @@
 import React from "react";
-import BetterPagination from "./BetterPagination";
+import {BetterPagination} from "ui";
 
 
 const SomeTable5 = ({ patients }: any) => {

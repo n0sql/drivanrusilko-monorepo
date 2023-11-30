@@ -1,7 +1,6 @@
 import {  Sofia_Sans } from "next/font/google";
-import Header from "./header-nav";
-import Login from "../Login/Login";
-import {MainDrawer} from "ui";
+
+import {MainDrawer, Header, Login} from "ui";
 import FindTreatment from "../FindTreatment/FindTreatment";
 import { useSiteWideContext } from "../../context";
 import { products } from "../../data/products";
@@ -17,11 +16,11 @@ interface IProps {
     return (
     <>
     <MainDrawer classNam={sofi.className} useSiteWideContext={useSiteWideContext} products={products} menus={menus}/>
-    <Header classNam={sofi.className}><p>im the head</p></Header>
+    <Header  useSiteWideContext={useSiteWideContext} classNam={sofi.className}><p>im the head</p></Header>
     
-        <Login />
+        <Login useSiteWideContext={useSiteWideContext} />
         <FindTreatment />
-          <main className={`${sofi.className} flex min-h-screen flex-col items-center justify-between`}> {children}</main>{" "}
+          <main className={`${sofi.className} flex flex-col mt-12  min-h-screen items-center justify-between`}> {children}</main>
     </>
     );
   };

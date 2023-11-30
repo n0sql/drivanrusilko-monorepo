@@ -1,7 +1,5 @@
 import React from "react";
-import ClinicTable from "./ClinicTable";
 import { PlusSmallIcon } from "@heroicons/react/24/solid";
-import CategoriesTable from "./CategoriesTable";
 import SomeTable3 from "./ClinicTable";
 import SomeTable4 from "./CategoriesTable";
 import { ArrowUpIcon } from "@heroicons/react/24/outline";

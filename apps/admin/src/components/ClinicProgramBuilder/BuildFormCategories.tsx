@@ -1,7 +1,6 @@
 import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
 import React, { useEffect, useState } from "react";
-import FormInput from "../FormGeneratorComponents/FormInput";
-import FormSelect from "../FormGeneratorComponents/FormSelect";
+import {FormInput, FormSelect} from "ui";
 import { PlusIcon } from "@heroicons/react/24/outline";
 
 const BuildFormCategories = ({

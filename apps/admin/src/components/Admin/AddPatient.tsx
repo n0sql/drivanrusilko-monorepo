@@ -1,6 +1,6 @@
 import React from "react";
-import NewPatientForm1 from "./NewPatientForm1";
-import NewPatientForm2 from "./NewPatientForm2";
+import {NewPatientForm1, NewPatientForm2} from "ui";
+
 const AddPatient = () => {
   const [step, setStep] = React.useState(1);
 

@@ -1,7 +1,5 @@
 import React from "react";
 
-import FormInput from "../FormGeneratorComponents/FormInput";
-
 const EditLabCategory = ({ labCategory }: any) => {
   const [newLabCategoryName, setNewLabCategoryName] = React.useState<string>("");
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

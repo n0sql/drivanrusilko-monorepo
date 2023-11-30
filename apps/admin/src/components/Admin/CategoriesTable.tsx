@@ -1,11 +1,6 @@
 import React from "react";
-import EditLabCategory from "./EditLabCategory";
-import LabCategoryDelete from "./LabCategoryDelete";
-import BetterPagination from "./BetterPagination";
-import ClinicEditor from "./ClinicEditor";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import ClinicDelete from "./ClinicDelete";
-import CategoryDelete from "./CategoryDelete";
+import{ BetterPagination, CategoryDelete} from "ui";
+
 
 const SomeTable4 = ({ categories, router }: any) => {
   const onSubmitHandler = (data: any) => {

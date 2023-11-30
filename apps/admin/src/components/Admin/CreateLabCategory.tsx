@@ -1,7 +1,5 @@
 import React from "react";
 
-import FormInput from "../FormGeneratorComponents/FormInput";
-
 const CreateLabCategory = () => {
   const [labCategory, setLabCategory] = React.useState({
     name: "",
