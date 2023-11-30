@@ -29,7 +29,7 @@ const SmallDrawer = () => {
   }, [session]);
 
   return (
-    <div className="flex flex-col  justify-between mylist">
+    <div className="flex flex-col   justify-between mylist">
       <ul className=" list-none px-6 space-y-2 flex flex-col ">
         {/* <div className="flex flex-col mb-6 gap-5"> */}
         <li
@@ -165,8 +165,8 @@ const MainDrawer = () => {
   return (
 
      
-      <Drawer  className='rounded-tl-3xl  rounded-bl-3xl' placement="right"  open={openHomeModal} onClose={() => toggleHomeModal()}>
-        <div className=" dark:bg-slate-300">
+      <Drawer size={800} className='rounded-tl-3xl ' placement="right"  open={openHomeModal} onClose={() => toggleHomeModal()}>
+        <div className=" dark:bg-slate-300 rounded-tl-3xl rounded-bl-3xl">
         <div className="flex  items-center py-4 justify-between  mybtns">
           <Button
             onClick={() => {
@@ -197,7 +197,7 @@ const MainDrawer = () => {
         </div>
 
         </div>
-        <div className="bg-black min-h-[82vh] h-full transition-all">
+        <div className="bg-black min-h-[82vh]  h-full transition-all">
         {mainView ? (
           <SmallDrawer
            
