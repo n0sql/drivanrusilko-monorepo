@@ -1,7 +1,6 @@
 import React from "react";
 import EditLabCategory from "./EditLabCategory";
 import LabCategoryDelete from "./LabCategoryDelete";
-import { Dropdown, DropdownOptions, DropdownTriggerType } from "flowbite";
 import BetterPagination from "./BetterPagination";
 import ClinicEditor from "./ClinicEditor";
 import { PlusIcon } from "@heroicons/react/24/outline";

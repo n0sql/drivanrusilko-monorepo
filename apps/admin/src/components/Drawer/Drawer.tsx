@@ -4,13 +4,17 @@ import DrawerMenu from "./DrawerMenu";
 import SiteMenu from "./SiteMenu";
 import ProductsMenu from "./ProductsMenu";
 import Login from "../Login/Login";
-
-import { Button, Modal } from 'flowbite-react';
 import { useSession } from "next-auth/react";
 import  ArrowRightIcon  from "@heroicons/react/24/solid/ArrowRightIcon";
 import  XCircleIcon  from "@heroicons/react/24/solid/XCircleIcon";
+import {
+  Drawer,
+  Button,
+  Typography,
+  IconButton,
+} from "@material-tailwind/react";
 import { useSiteWideContext } from "../../context";
-const Drawer = () => {
+const SmallDrawer = () => {
   const {toggleView} =  useSiteWideContext();
   const { data: session, status } = useSession();
   useEffect(() => {
@@ -161,8 +165,8 @@ const MainDrawer = () => {
   return (
 
      
-      <Modal size={"2xl"} className='absolute z-50 transition-all delay-1000 rounded-tl-3xl  rounded-bl-3xl' position={'top-right'} dismissible show={openHomeModal} onClose={() => toggleHomeModal()}>
-        <Modal.Header className=" dark:bg-slate-300">
+      <Drawer  className='rounded-tl-3xl  rounded-bl-3xl' placement="right"  open={openHomeModal} onClose={() => toggleHomeModal()}>
+        <div className=" dark:bg-slate-300">
         <div className="flex  items-center py-4 justify-between  mybtns">
           <Button
             onClick={() => {
@@ -192,10 +196,10 @@ const MainDrawer = () => {
           </div>
         </div>
 
-        </Modal.Header>
-        <Modal.Body className="bg-black min-h-[82vh] h-full transition-all">
+        </div>
+        <div className="bg-black min-h-[82vh] h-full transition-all">
         {mainView ? (
-          <Drawer
+          <SmallDrawer
            
           />
         ) : treatmentView ? (
@@ -205,9 +209,9 @@ const MainDrawer = () => {
         ) : meetView ? (
           <SiteMenu />
         ) : null}
-        </Modal.Body>
+        </div>
 
-      </Modal>
+      </Drawer>
     
   );
 }

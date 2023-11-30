@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
-import flowbite from "flowbite/plugin";
+
 const config: Config = {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx,mjs}","./node_modules/flowbite-react/**/*.js",],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx,mjs}","./node_modules/@material-tailwind/react/components/*.{js,ts,jsx,tsx}",],
   theme: {
     extend: {
       backgroundImage: {
@@ -11,6 +11,6 @@ const config: Config = {
     },
   },
   darkMode: "class",
-  plugins: [flowbite],
+  plugins: [],
 };
 export default config;

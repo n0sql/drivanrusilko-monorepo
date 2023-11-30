@@ -1,7 +1,6 @@
 import React from "react";
 import EditLabCategory from "./EditLabCategory";
 import LabCategoryDelete from "./LabCategoryDelete";
-import { Dropdown, DropdownOptions, DropdownTriggerType } from "flowbite";
 import BetterPagination from "./BetterPagination";
 
 const Sometable = ({ categories }: any) => {
@@ -12,24 +11,6 @@ const Sometable = ({ categories }: any) => {
     setFilter(filter);
   };
 
-  const options: DropdownOptions = {
-    placement: "bottom",
-    triggerType: "click",
-    offsetSkidding: 0,
-    offsetDistance: 10,
-    delay: 300,
-  };
-  React.useEffect(() => {
-    const triggerEl = document.getElementById("filterDropdownButton");
-    const targetEl = document.getElementById("filterDropdown");
-
-    if (triggerEl !== null && targetEl !== null) {
-      const dropdown = new Dropdown(targetEl, triggerEl, options);
-
-      dropdown.show();
-    }
-  }, []);
-  console.log(categories);
 
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = React.useState(1);

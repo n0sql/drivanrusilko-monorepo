@@ -3,7 +3,7 @@ import Header from "./header-nav";
 import Login from "../Login/Login";
 import MainDrawer from "../Drawer/Drawer";
 import FindTreatment from "../FindTreatment/FindTreatment";
-import { DarkThemeToggle, Flowbite } from 'flowbite-react';
+
 
 const sofi = Sofia_Sans({subsets: ["latin"]})
 interface IProps {
@@ -19,7 +19,7 @@ interface IProps {
     
         <Login />
         <FindTreatment />
-          <main className={`${sofi.className} flex min-h-screen flex-col items-center justify-between `}> <Flowbite><DarkThemeToggle />{children}</Flowbite></main>{" "}
+          <main className={`${sofi.className} flex min-h-screen flex-col items-center justify-between `}> {children}</main>{" "}
     </>
     );
   };

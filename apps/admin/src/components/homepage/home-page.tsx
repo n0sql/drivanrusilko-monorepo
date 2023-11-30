@@ -1,7 +1,6 @@
 import React from "react";
 import dynamic from 'next/dynamic';
 import Image from "next/image";
-import { Dropdown } from 'flowbite-react';
 const DynamicCard = dynamic(() => import('ui').then((mod) => mod.Card), {
   ssr: false, // This will disable server-side rendering for the Card component.
 });
@@ -162,12 +161,6 @@ export default function HomePage():JSX.Element{
           </div>
         </div>
       </div>
-      <Dropdown label="Dropdown button" dismissOnClick={false}>
-      <Dropdown.Item>Dashboard</Dropdown.Item>
-      <Dropdown.Item>Settings</Dropdown.Item>
-      <Dropdown.Item>Earnings</Dropdown.Item>
-      <Dropdown.Item>Sign out</Dropdown.Item>
-    </Dropdown>
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
       
         {LINKS.map(({ title, href, description }) => (
