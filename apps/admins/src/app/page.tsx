@@ -17,7 +17,8 @@ function Gradient({
       } ${conic ? "bg-glow-conic" : ""} ${className}`}
     />
   );
-}
+} 
+
 
 const LINKS = [
   {
