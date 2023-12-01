@@ -11,7 +11,7 @@ import {
 
 
 export const MainDrawer = ({useSiteWideContext, menus, products, classNam}:{useSiteWideContext:any, menus:any, products:any, classNam:any}) => {
-  const {mainView, treatmentView, shopView, meetView, openHomeModal, toggleHomeModal, toggleView} = useSiteWideContext();
+  const {mainView, treatmentView, shopView, meetView, openHomeModal, toggleHomeModal, toggleView, toggleAuthModal} = useSiteWideContext();
    
   
 
@@ -19,7 +19,7 @@ export const MainDrawer = ({useSiteWideContext, menus, products, classNam}:{useS
   return (
 
       
-      <Drawer size={550} className={`${classNam} rounded-tl-3xl rounded-bl-3xl dark:bg-black` } placement="right"  open={openHomeModal} onClose={() => toggleHomeModal()}>
+      <Drawer size={550} className={`${classNam} rounded-tl-3xl rounded-bl-3xl dark:bg-black`} placement="right"  open={openHomeModal} onClose={() => toggleHomeModal()}>
         <div className="px-6 ui-text-black dark:bg-black rounded-tl-3xl rounded-bl-3xl">
         <div className="flex  items-center py-4 justify-between  mybtns">
        {
@@ -36,7 +36,9 @@ export const MainDrawer = ({useSiteWideContext, menus, products, classNam}:{useS
           <div className="flex  justify-between">
         
          
-            <a className="cursor-pointer [&>svg]:text-gray-950 dark:[&>svg]:text-gray-100 ui-py-2">
+            <a className="cursor-pointer [&>svg]:text-gray-950 dark:[&>svg]:text-gray-100 ui-py-2" onClick={()=>{
+              toggleAuthModal()
+            }}>
           <UserCircleIcon className="w-8" />
           </a>
           <a type="button" className="cursor-pointer [&>svg]:text-gray-950 dark:[&>svg]:text-gray-100 ui-py-2" onClick={()=>{

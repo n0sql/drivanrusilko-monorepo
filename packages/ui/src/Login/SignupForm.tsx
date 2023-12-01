@@ -1,3 +1,4 @@
+import { Input } from "../input";
 const SignupForm = ({ useSiteWideContext }: any) => {
   const { handleSubmit, response, 
      handleEmailChange, handlePassWordChange, toggleAuthView } = useSiteWideContext()
@@ -12,52 +13,27 @@ const SignupForm = ({ useSiteWideContext }: any) => {
             : "Error Creating User please try again"}
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleSubmit} className="form flex flex-col justify-between gap-y-4">
           <h4 className="text-left  text-primary font-bold">Welcome</h4>
-
-          <div className=" mb-3 ">
-            <label htmlFor="userEmail" className="sr-only">
-              Email
-            </label>
-            <input
-              required
-              aria-required="true"
-              type="email"
-              name="email"
-              id="userEmail"
-              onChange={(e) => handleEmailChange(e)}
-              placeholder="email address"
-              className="border-neutral-600  placeholder-neutral-600 placeholder:text-lg lg:w-full mx-auto  py-5 w-full  rounded-xl sm:text-sm  form-input"
-            />
+         
+          <div className="relative text-center ">
+          <Input value="email" type="text" changeHandler={handleEmailChange} label="Email"/>
           </div>
-
-          <div className="relative mb-6 text-center ">
-            <label htmlFor="password1" className="sr-only">
-              Password
-            </label>
-            <input
-              required
-              aria-required="true"
-              type="password"
-              onChange={(e) => handlePassWordChange(e)}
-              id="password1"
-              name="password"
-              placeholder="password"
-              className="border-neutral-600  placeholder-neutral-600 placeholder:text-lg lg:w-96  w-72 py-5 rounded-xl  sm:text-sm form-input "
-            />
+          <div className="relative  text-center ">
+          <Input value="password" type="password" changeHandler={handlePassWordChange} label="Password"/>
           </div>
 
           <div className="mb-5 form-submit">
             <input
               type="submit"
-              className="btn bg-primary w-full text-gray-100 lg:w-96 w-72 rounded-full py-2 cursor-pointer "
+              className="bg-black dark:bg-white dark:text-gray-100 w-full text-gray-100 lg:w-96 w-72 rounded-full py-2 cursor-pointer"
               value="Sign Up"
             />
           </div>
         </form>
       )}
 
-      {/* signup if irst time */}
+      {/* signup ifirst time */}
 
       <div className="mb-3 text-center text-[#6f50cb]">
         <p className="text-primary text-sm">
@@ -65,7 +41,7 @@ const SignupForm = ({ useSiteWideContext }: any) => {
           <button
             className="text-[#6f50cb] font-bold"
             onClick={() => {
-              toggleAuthView('signup')
+              toggleAuthView('login')
             }}
           >
             Sign in

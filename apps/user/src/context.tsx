@@ -52,13 +52,10 @@ interface SiteWideContextType {
     const [treatmentView, setTreatmentView] = useState<boolean>(false);
     const [shopView, setShopView] = useState<boolean>(false);
     const [meetView, setMeetView] = useState<boolean>(false);
-
-
-    
     const [openHomeModal, setOpenHomeModal] = useState<boolean>(false);
     const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
     const [view, setView]  =  useState<string>('main')
-    const [authView, setAuthView] =  useState<string>('')
+    const [authView, setAuthView] =  useState<string>('login')
     const toggleAuthModal = () => setOpenAuthModal(!openAuthModal);
     const toggleHomeModal = () => setOpenHomeModal(!openHomeModal);
     const toggleView = (view: string) => setView(view);
@@ -86,6 +83,7 @@ interface SiteWideContextType {
                     Object.keys(viewMap).map((item:string) => item === authView ? viewMap[item as Viewkey](true) : viewMap[item as Viewkey](false))
                 
     }, [authView])
+    
     const handleLogin = (e: any) => {
         e.preventDefault();
         const email = e.currentTarget.email.value;

@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 const ForgotPassword = ({ useSiteWideContext }: any) => {
   const { 
       emailSent, noEmailSent, handleForgotPassword,
@@ -40,30 +42,20 @@ const ForgotPassword = ({ useSiteWideContext }: any) => {
         <>
           {" "}
           <form method="POST" onSubmit={handleForgotPassword} className="form ">
-            <h4 className="w-96  mx-auto text-primary font-bold ">
-              Enter your email and well send a link to reset your password
+            <h4 className="w-72  mx-auto text-primary font-bold mb-3 ">
+              Enter your email and we'll send a link to reset your password
             </h4>
 
             <div className=" mb-6 text-center">
-              <label htmlFor="email" className="sr-only">
-                Email
-              </label>
-              <input
-                required
-                aria-required="true"
-                onChange={(e) => handleEmailChange(e)}
-                type="email"
-                id="email"
-                name="email"
-                placeholder="email address"
-                className="border-neutral-600  placeholder-neutral-600 placeholder:text-lg lg:w-96  w-72 py-5 rounded-xl  sm:text-sm form-input "
-              />
+            <div className="relative w-72 mx-auto text-center ">
+          <Input value="email" type="text" changeHandler={handleEmailChange} label="Email"/>
+          </div>
             </div>
 
             <div className="mb-5 form-submit text-center">
               <input
                 type="submit"
-                className="btn bg-primary w-full text-gray-100 lg:w-96 w-72 rounded-full py-2 cursor-pointer"
+                className="btn bg-black dark:bg-white dark:text-gray-100 w-full text-gray-100 lg:w-72 rounded-full py-2 cursor-pointer"
                 value="Reset Password"
               />
             </div>

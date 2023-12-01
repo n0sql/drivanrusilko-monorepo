@@ -1,57 +1,34 @@
+import { Input } from "../input";
 const LoginForm = ({ useSiteWideContext }: any) => {
   // after submit hide login form
- const { handleLogin, toggleAuthView } = useSiteWideContext()
+ const { handleLogin, toggleAuthView,handleEmailChange, handlePassWordChange,  } = useSiteWideContext()
   return (
-    <div className="bg-white mx-auto">
-      <form onSubmit={handleLogin} className="form">
-        <h4 className="text-left  text-primary font-bold">Welcome Back</h4>
-
-        <div className=" mb-3 ">
-          <label htmlFor="email" className="sr-only">
-            Email
-          </label>
-          <input
-            required
-            aria-required="true"
-            type="email"
-            id="email"
-            name="email"
-            placeholder="email address"
-            className="border-neutral-600  placeholder-neutral-600 placeholder:text-lg lg:w-full mx-auto  py-5 w-full  rounded-xl sm:text-sm  form-input"
-          />
-        </div>
-
-        <div className="relative mb-3 text-center ">
-          <label htmlFor="password" className="sr-only">
-            Password
-          </label>
-          <input
-            required
-            aria-required="true"
-            type="password"
-            id="password"
-            name="password"
-            placeholder="password"
-            className="border-neutral-600  placeholder-neutral-600 placeholder:text-lg lg:w-96  w-72 py-5 rounded-xl  sm:text-sm form-input "
-          />
-        </div>
+    <div className="bg-white mx-auto ">
+      <h4 className="text-left  text-primary font-bold mb-2">Welcome Back</h4>
+      <form onSubmit={handleLogin} className="flex flex-col justify-between gap-y-4">
+      <div className="relative text-center ">
+          <Input value="email" type="text" changeHandler={handleEmailChange} label="Email"/>
+          </div>
+          <div className="relative  text-center ">
+          <Input value="password" type="password" changeHandler={handlePassWordChange} label="Password"/>
+          </div>
 
         {/* forgot your password */}
-        <div className="mb-6 text-right">
-          <p
-            className="text-[#6f50cb] font-bold"
+        <div className="text-right">
+          <span
+            className="text-[#6f50cb] font-bold text-sm"
             onClick={() => {
               toggleAuthView("resetPw")
 
             }}
           >
             Forgot your password?
-          </p>
+          </span>
         </div>
-        <div className="mb-5 form-submit">
+        <div className=" form-submit">
           <input
             type="submit"
-            className="btn bg-primary w-full text-gray-100 lg:w-96 w-72 rounded-full py-2 cursor-pointer"
+            className="btn bg-black dark:bg-white dark:text-gray-100 w-full text-gray-100 lg:w-96 w-72 rounded-full py-2 cursor-pointer"
             value="Login"
           />
         </div>
@@ -59,8 +36,8 @@ const LoginForm = ({ useSiteWideContext }: any) => {
 
       {/* signup if irst time */}
 
-      <div className="mb-3 text-center">
-        <p className="text-primary text-sm">
+      <div className="text-center">
+        <span className="text-[#6f50cb] text-sm">
           Dont have an account?{` `}
           <button
             className="text-[#6f50cb] font-bold"
@@ -70,7 +47,7 @@ const LoginForm = ({ useSiteWideContext }: any) => {
           >
             Create an account
           </button>
-        </p>
+        </span>
       </div>
     </div>
   );

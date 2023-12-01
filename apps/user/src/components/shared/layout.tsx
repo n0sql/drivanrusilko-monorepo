@@ -18,7 +18,7 @@ interface IProps {
     <MainDrawer classNam={sofi.className} useSiteWideContext={useSiteWideContext} products={products} menus={menus}/>
     <Header  useSiteWideContext={useSiteWideContext} classNam={sofi.className}><p>im the head</p></Header>
     
-        <Login useSiteWideContext={useSiteWideContext} />
+        <Login classNam={sofi.className} useSiteWideContext={useSiteWideContext} />
         <FindTreatment />
           <main className={`${sofi.className} flex flex-col mt-12  min-h-screen items-center justify-between`}> {children}</main>
     </>
