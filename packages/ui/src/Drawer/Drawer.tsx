@@ -1,12 +1,11 @@
 import DrawerMenu from "./DrawerMenu";
 import SiteMenu from "./SiteMenu";
 import ProductsMenu from "./ProductsMenu";
-import  ArrowRightIcon  from "@heroicons/react/24/solid/ArrowRightIcon";
+import { UserCircleIcon,XCircleIcon, ChevronLeftIcon } from "@heroicons/react/24/solid";
+
 import SmallDrawer from "./SmallDrawer";
 import {
   Drawer,
-  Button,
-  Typography
 } from "@material-tailwind/react";
 
 
@@ -21,38 +20,36 @@ export const MainDrawer = ({useSiteWideContext, menus, products, classNam}:{useS
 
       
       <Drawer size={550} className={`${classNam} rounded-tl-3xl rounded-bl-3xl dark:bg-black` } placement="right"  open={openHomeModal} onClose={() => toggleHomeModal()}>
-        <div className="ui-text-black dark:bg-black rounded-tl-3xl rounded-bl-3xl">
+        <div className="px-6 ui-text-black dark:bg-black rounded-tl-3xl rounded-bl-3xl">
         <div className="flex  items-center py-4 justify-between  mybtns">
-          <Button
-            onClick={() => {
-              toggleView('main')
-            }}
-            className={`${
-              mainView ? "invisible" : ""
-            } hover:bg-[#FFFFFF1C] flex items-center text-gray-300 text-sm font-bold  gap-2 rounded-full shadow shadow-lg`}
-          >
-     
-            <Typography className="  [&>svg]:text-gray-300 dark:[&>svg]:text-gray-300">
-              <ArrowRightIcon className="w-6 h-6" />
-            </Typography>
-            <Typography className="text-gray-300 pr-3  ">Back</Typography>
-          </Button>
+       {
+        mainView ? ( <h3 className="text-left text-3xl font-bold text-gray-950 px-2">Menu</h3>): (<a type="button" onClick={() => {
+          toggleView('main')
+        }} className="cursor-pointer [&>svg]:text-gray-950 dark:[&>svg]:text-gray-100 ui-py-2 font-bold" >
+          <ChevronLeftIcon className="w-5" />
+        </a>)
+       }
+       
+    
+            
+           
           <div className="flex  justify-between">
         
-            <Button
-              // hide if signed in
-              id="loginbtn"
-              type="button"
-              className="bg-primary text-gray-300 outline outline-gray-700 outline-[0.5px] text-sm rounded-full  shadow shadow-lg "
-            >
-              <Typography className="block py-1 px-4 text-black text-gray-300 text-sm"> Sign In </Typography>
-            </Button>
-
+         
+            <a className="cursor-pointer [&>svg]:text-gray-950 dark:[&>svg]:text-gray-100 ui-py-2">
+          <UserCircleIcon className="w-8" />
+          </a>
+          <a type="button" className="cursor-pointer [&>svg]:text-gray-950 dark:[&>svg]:text-gray-100 ui-py-2" onClick={()=>{
+            toggleHomeModal()
+          }}>
+          <XCircleIcon className="w-8" />
+          </a>
           </div>
+          
         </div>
 
         </div>
-        <div className="bg-gray-200 dark:bg-black min-h-[82vh]  h-full transition-all">
+        <div className="dark:bg-black h-[calc(80vh-8rem)]   transition-all">
         {mainView ? (
           <SmallDrawer
            useSiteWideContext={useSiteWideContext}
