@@ -11,7 +11,7 @@ const FindTreatment = () => {
 
 const {openTreatementModal, toggleTreatmentModal} = useSiteWideContext();
   return (
-    <Drawer size={600} open={openTreatementModal} onClose={()=>{toggleTreatmentModal()}} placement="right"
+    <Drawer overlay={false} size={600} open={openTreatementModal} onClose={()=>{toggleTreatmentModal()}} placement="right"
       className={`${sofi.className} bg-white  overflow-y-scroll   flex mylist    w-full     flex-col text-neutral-700 shadow-sm outline-none dark:bg-neutral-800 dark:text-neutral-200`}
       id="offcanvasTreatment"
     >
