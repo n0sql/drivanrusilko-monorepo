@@ -16,11 +16,11 @@ const SmallDrawer = ({useSiteWideContext}:{useSiteWideContext:any}) => {
             }}
           > 
             <div className="flex flex-col items-start ">
-              <h1 className="text-gray-950 font-semibold text-xl ">Explore treatments</h1>
+              <h1 className="text-gray-950 dark:text-gray-100 font-semibold text-xl ">Explore treatments</h1>
               <p className="text-[#FFFFFFA8] text-sm ">Proven treatments for dozen of conditions</p>
             </div>
             <div className="flex items-center">
-              <button className=" text-gray-950 text-sm font-bold py-2 px-4 rounded-full  ">
+              <button className=" text-gray-950 dark:text-gray-100 text-sm font-bold py-2 px-4 rounded-full  ">
                 {/* right arrow */}
                 <svg
                   className="w-6 h-6 "
@@ -46,14 +46,14 @@ const SmallDrawer = ({useSiteWideContext}:{useSiteWideContext:any}) => {
             }}
           >
             <div className="flex flex-col items-start ">
-              <h1 className="text-gray-950 font-semibold   text-xl">Shop products</h1>
+              <h1 className="text-gray-950 font-semibold  dark:text-gray-100 text-xl">Shop products</h1>
               <p className="text-[#FFFFFFA8] text-sm">
                 Trusted prescription and over-the-counter options
               </p>
             </div>
   
             <div className="flex items-center">
-              <button className="text-gray-950 text-sm font-bold py-2 px-4 rounded-full  ">
+              <button className="text-gray-950 dark:text-gray-100 text-sm font-bold py-2 px-4 rounded-full  ">
                 {/* right arrow */}
                 <svg
                   className="w-6"
@@ -78,13 +78,13 @@ const SmallDrawer = ({useSiteWideContext}:{useSiteWideContext:any}) => {
             }}
           >
             <div className="flex flex-col items-start">
-              <h1 className="text-gray-950 font-semibold  text-xl ">Meet Drivanrusilko</h1>
+              <h1 className="text-gray-950 font-semibold dark:text-gray-100  text-xl ">Meet Drivanrusilko</h1>
               <p className="text-[#FFFFFFA8] text-sm ">
                 What we do, who we do it for and how we do it
               </p>
             </div>
             <div className="flex items-center">
-              <button className="text-gray-950 text-sm font-bold py-2 px-4 rounded-full uppercase">
+              <button className="text-gray-950 text-sm dark:text-gray-100 font-bold py-2 px-4 rounded-full uppercase">
                 {/* right arrow */}
                 <svg
                   className="w-6"
@@ -108,10 +108,10 @@ const SmallDrawer = ({useSiteWideContext}:{useSiteWideContext:any}) => {
           id="consultation"
           className="  mx-3 h-48 p-3 mt-20  rounded-3xl cursor-pointer place-self-stretch"
         >
-          <h4 className="text-gray-950 font-semibold lg:text-2xl text-sm">
+          <h4 className="text-gray-950 dark:text-gray-100 font-semibold lg:text-2xl text-sm">
             Start a free consultation
           </h4>
-          <button className="text-gray-950 text-sm py-2">
+          <button className="text-gray-950 dark:text-gray-100 text-sm py-2">
             <svg
               className="w-6 h-6 pl-1 bg-white rounded-full text-primary"
               aria-hidden="true"

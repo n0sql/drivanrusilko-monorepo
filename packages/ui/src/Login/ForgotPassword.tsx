@@ -7,7 +7,7 @@ const ForgotPassword = ({ useSiteWideContext }: any) => {
     } = useSiteWideContext()
 
   return (
-    <div className="bg-white ">
+    <div className=" ">
       {emailSent ? (
         <div className="mx-auto w-96">
           <h4 className="text-left  text-primary font-bold mb-5">Check your email</h4>
@@ -33,7 +33,7 @@ const ForgotPassword = ({ useSiteWideContext }: any) => {
               toggleAuthView('resetPw')
               
             }}
-            className="btn bg-primary w-full text-gray-100 lg:w-96 w-72 rounded-full py-2 cursor-pointer"
+            className="btn bg-primary  w-full text-gray-100 lg:w-96 w-72 rounded-full py-2 cursor-pointer"
           >
             Back to Login
           </button>
@@ -55,7 +55,7 @@ const ForgotPassword = ({ useSiteWideContext }: any) => {
             <div className="mb-5 form-submit text-center">
               <input
                 type="submit"
-                className="btn bg-black dark:bg-white dark:text-gray-100 w-full text-gray-100 lg:w-72 rounded-full py-2 cursor-pointer"
+                className="btn bg-black dark:bg-white dark:text-gray-950 w-full text-gray-100 lg:w-72 rounded-full py-2 cursor-pointer"
                 value="Reset Password"
               />
             </div>
@@ -64,7 +64,7 @@ const ForgotPassword = ({ useSiteWideContext }: any) => {
             <p className="text-sm text-primary">
               Remember your password?{` `}
               <button
-                className="text-[#6f50cb] font-bold"
+                className="text-[#6f50cb] font-bold hover:underline"
                 onClick={() => {
                   toggleAuthView("login")
                 }}

@@ -2,16 +2,16 @@ const menus = ["About Us", "How it Works", "Our Medical Experts", "Reviews"];
 const SiteMenu = () => {
   return (
     <ul className="relative  list-none px-6 space-y-6 mybtns" data-te-sidenav-menu-ref>
-      <h4 className="text-left font-bold text-gray-950 px-2">Meet Drivanrusilko</h4>
+      <h4 className="text-left font-bold text-gray-950 dark:text-gray-100 px-2">Meet Drivanrusilko</h4>
       {menus.map((menu, index) => {
         return (
           <li key={index} className="relative">
             <a
-              className="flex justify-between cursor-pointer items-center truncate rounded-[5px]  px-2 text-gray-950 outline-none transition duration-300 ease-linear hover:bg-[#FFFFFF1C] hover:text-gray-950 hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-950 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+              className="flex justify-between cursor-pointer items-center truncate rounded-[5px]  px-2 text-gray-950 outline-none transition duration-300 ease-linear hover:bg-[#FFFFFF1C] hover:text-gray-950 hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-100 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
               data-te-sidenav-link-ref
             >
               <p className="truncate">{menu}</p>
-              <button className=" text-gray-950 text-sm font-bold py-2 px-4 rounded-full  ">
+              <button className=" text-gray-950 dark:text-gray-100 text-sm font-bold py-2 px-4 rounded-full  ">
                 {/* right arrow */}
                 <svg
                   className="w-6 h-6"

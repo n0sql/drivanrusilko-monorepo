@@ -3,7 +3,7 @@ const LoginForm = ({ useSiteWideContext }: any) => {
   // after submit hide login form
  const { handleLogin, toggleAuthView,handleEmailChange, handlePassWordChange,  } = useSiteWideContext()
   return (
-    <div className="bg-white mx-auto ">
+    <div className="mx-auto ">
       <h4 className="text-left  text-primary font-bold mb-2">Welcome Back</h4>
       <form onSubmit={handleLogin} className="flex flex-col justify-between gap-y-4">
       <div className="relative text-center ">
@@ -18,7 +18,7 @@ const LoginForm = ({ useSiteWideContext }: any) => {
           <a
           type="button"
 
-            className="text-[#6f50cb] font-bold text-sm cursor-pointer"
+            className="text-[#6f50cb] hover:underline font-bold text-sm cursor-pointer"
             onClick={() => {
               toggleAuthView("resetPw")
 
@@ -30,7 +30,7 @@ const LoginForm = ({ useSiteWideContext }: any) => {
         <div className=" form-submit">
           <input
             type="submit"
-            className="btn bg-black dark:bg-white dark:text-gray-100 w-full text-gray-100 lg:w-96 w-72 rounded-full py-2 cursor-pointer"
+            className="btn bg-black dark:bg-white dark:text-gray-950 w-full text-gray-100 lg:w-96 w-72 rounded-full py-2 cursor-pointer"
             value="Login"
           />
         </div>
@@ -39,10 +39,10 @@ const LoginForm = ({ useSiteWideContext }: any) => {
       {/* signup if irst time */}
 
       <div className="text-center">
-        <span className="text-[#6f50cb] text-sm">
+        <span className="text-[#6f50cb] dark:text-gray-100 text-sm">
           Dont have an account?{` `}
           <button
-            className="text-[#6f50cb] font-bold"
+            className="text-[#6f50cb] font-bold hover:underline"
             onClick={() => {
               toggleAuthView("signup")
             }}

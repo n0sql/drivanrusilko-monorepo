@@ -5,7 +5,7 @@ const SignupForm = ({ useSiteWideContext }: any) => {
 
 
   return (
-    <div className="bg-white mx-auto">
+    <div className=" mx-auto">
       {response !== null ? (
         <div className="text-center text-primary font-bold mb-5">
           {response === "User created"
@@ -26,7 +26,7 @@ const SignupForm = ({ useSiteWideContext }: any) => {
           <div className="mb-5 form-submit">
             <input
               type="submit"
-              className="bg-black dark:bg-white dark:text-gray-100 w-full text-gray-100 lg:w-96 w-72 rounded-full py-2 cursor-pointer"
+              className="bg-black dark:bg-gray-100 dark:text-gray-950 w-full text-gray-100 lg:w-96 w-72 rounded-full py-2 cursor-pointer"
               value="Sign Up"
             />
           </div>
@@ -35,7 +35,7 @@ const SignupForm = ({ useSiteWideContext }: any) => {
 
       {/* signup ifirst time */}
 
-      <div className="mb-3 text-center text-[#6f50cb]">
+      <div className="mb-3 text-center text-[#6f50cb] dark:text-gray-100">
         <p className="text-primary text-sm">
           Already have an account?{` `}
           <button

@@ -12,12 +12,12 @@ export const Login = ({useSiteWideContext, classNam}:any) => {
 
 
   return (
-    <Drawer size={800} open={openAuthModal} placement="right" onClose={()=>{toggleAuthModal()} }
-     className={`${classNam} flex flex-col text-neutral-700 shadow-sm outline-none dark:bg-neutral-800 dark:text-neutral-200`}
+    <Drawer overlay={false} size={800} open={openAuthModal} placement="right" onClose={()=>{toggleAuthModal()} }
+     className={`${classNam} flex flex-col text-neutral-700 shadow-sm outline-none dark:bg-gray-950 dark:text-neutral-200`}
     >
       <button
         onClick={()=>{toggleAuthModal();}}
-        className=" text-black text-sm font-bold   rounded-full  shadow shadow-lg uppercase absolute left-0 top-0 mt-5 ml-3"
+        className=" text-gray-950 dark:text-gray-100 text-sm font-bold   rounded-full  shadow shadow-lg uppercase absolute left-0 top-0 mt-5 ml-3"
       >
         <svg
           className="w-6 h-6"

@@ -25,12 +25,12 @@ export function Header ({children, classNam,useSiteWideContext}:
           </div>
     
           <div
-            className="static flex  order-1 lg:order-2 md:order-1"
+            className="lg:mr-3 flex  order-1 lg:order-2 md:order-1 gap-2"
             data-te-nav-item-ref
             data-te-dropdown-ref
           >
             <a
-              className="flex text-sm  font-bold items-center bg-white whitespace-nowrap py-2 px-4 rounded-full shadow shadow-lg uppercase  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-4"
+              className="flex text-sm  font-bold items-center bg-white dark:bg-gray-950 whitespace-nowrap py-2 px-4 rounded-full shadow shadow-lg uppercase  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-4"
               href="/"
               data-te-ripple-init
               data-te-ripple-color="light"
@@ -57,7 +57,7 @@ export function Header ({children, classNam,useSiteWideContext}:
               </span>
             </a>
             <button
-              className="hover:bg-gray-100 text-gray-700 text-sm font-bold py-2 px-4 rounded-full"
+              className="hover:bg-gray-100 dark:bg-gray-950 text-gray-700 dark:text-gray-100 text-sm font-bold py-1  px-4 rounded-full"
               onClick={()=>{toggleHomeModal()}}
             >
               <svg

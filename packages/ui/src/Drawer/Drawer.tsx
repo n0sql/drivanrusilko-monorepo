@@ -19,13 +19,13 @@ export const MainDrawer = ({useSiteWideContext, menus, products, classNam}:{useS
   return (
 
       
-      <Drawer size={550} className={`${classNam} rounded-tl-3xl rounded-bl-3xl dark:bg-black`} placement="right"  open={openHomeModal} onClose={() => toggleHomeModal()}>
+      <Drawer overlay={false} size={550} className={`${classNam} rounded-tl-3xl rounded-bl-3xl dark:bg-gray-950`} placement="right"  open={openHomeModal} onClose={() => toggleHomeModal()}>
         <div className="px-6 ui-text-black dark:bg-black rounded-tl-3xl rounded-bl-3xl">
         <div className="flex  items-center py-4 justify-between  mybtns">
        {
-        mainView ? ( <h3 className="text-left text-3xl font-bold text-gray-950 px-2">Menu</h3>): (<a type="button" onClick={() => {
+        mainView ? ( <h3 className="text-left text-3xl font-bold text-gray-950 dark:text-gray-100 px-2">Menu</h3>): (<a type="button" onClick={() => {
           toggleView('main')
-        }} className="cursor-pointer [&>svg]:text-gray-950 dark:[&>svg]:text-gray-100 ui-py-2 font-bold" >
+        }} className="cursor-pointer [&>svg]:text-gray-950  dark:[&>svg]:text-gray-100 ui-py-2 font-bold" >
           <ChevronLeftIcon className="w-5" />
         </a>)
        }
@@ -41,7 +41,7 @@ export const MainDrawer = ({useSiteWideContext, menus, products, classNam}:{useS
             }}>
           <UserCircleIcon className="w-8" />
           </a>
-          <a type="button" className="cursor-pointer [&>svg]:text-gray-950 dark:[&>svg]:text-gray-100 ui-py-2" onClick={()=>{
+          <a type="button" className="cursor-pointer [&>svg]:text-gray-950  dark:[&>svg]:text-gray-100 ui-py-2" onClick={()=>{
             toggleHomeModal()
           }}>
           <XCircleIcon className="w-8" />
