@@ -4,7 +4,7 @@ export function Header ({children, classNam,useSiteWideContext}:
     const {toggleHomeModal} = useSiteWideContext();
       return(  
         
-        <div className={` w-full fixed top-0 left-0`}>
+        <div className={` w-full fixed top-0 left-0 z-[100]`}>
       <nav
           className={`${classNam} relative flex-wrap flex w-full items-center justify-center lg:justify-between bg-neutral-50 py-2 text-neutral-600 shadow-lg dark:bg-neutral-700 dark:text-neutral-300 dark:shadow-black/5 lg:justify-between`}
           id="navbarSupportedContentX"

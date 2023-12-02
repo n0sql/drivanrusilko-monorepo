@@ -41,7 +41,6 @@ export * from "./Admin/NewPatientForm2";
 // export * from "./Admin/ScheduleAppointment";
 export * from "./Admin/Selectele";
 export * from "./DropdownMenu/DropdownMenu";
-export * from "./FindTreatment/FindTreatment"
 export * from  "./FormGeneratorComponents/FormCheckbox";
 export * from  "./FormGeneratorComponents/FormInput";
 export * from  "./FormGeneratorComponents/FormRadio";

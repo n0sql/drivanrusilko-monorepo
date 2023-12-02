@@ -1,10 +1,8 @@
 import React from "react";
-import dynamic from 'next/dynamic';
 import Image from "next/image";
-import Button from "@material-tailwind/react/components/Button"
-const DynamicCard = dynamic(() => import('ui').then((mod) => mod.Card), {
-  ssr: false, // This will disable server-side rendering for the Card component.
-});
+import { useSiteWideContext } from "../../context";
+import { Card } from "ui";
+
 // const menus = ["About Us", "How it Works", "Our Medical Experts", "Reviews"];
 function Gradient({
   conic,
@@ -50,33 +48,33 @@ const LINKS = [
   },
 ];
 export default function HomePage():JSX.Element{
-
+const {toggleTreatmentModal} = useSiteWideContext()
 
     return(
-        <div className="mt-12">
+        <div className="mt-12 relative">
            
             
          
-      <div className="flex  lg:flex-row flex-col items-center lg:items-start justify-between">
+      <div className="flex z-50 relative  lg:flex-row flex-col items-center lg:items-start justify-between">
         <div className="flex flex-col mb-12">
-          <h1 className="text-primary">Personalized, doctor-backed</h1>
+          <h1 className="text-primary ">Personalized, doctor-backed</h1>
           <h1 className="text-[#8f8f8f]">treatment plans</h1>
         </div>
         
 
         <div className="flex flex-col text-gray-200 gap-5 ">
-          <p className="text-[#8f8f8f]">
+          <h1 className="text-[#8f8f8f]">
             Finding what works can be hard. Our online process and <br /> medical experts make it
             simple.
-          </p>
+          </h1>
 
-          <Button
-          
-           
-            className="px-4 py-2 bg-blue-800 rounded-full cursor-pointer  lg:w-48  text-center w-full mb-6"
+          <a
+          type="button"
+           onClick= {()=>{toggleTreatmentModal();}}
+            className="px-4 py-2 bg-[#222030] rounded-full cursor-pointer  lg:w-48  text-center w-full mb-6"
           >
             Find my treatment
-          </Button>
+          </a>
         </div>
       </div>
       {/* <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -161,9 +159,9 @@ export default function HomePage():JSX.Element{
       <div className="mb-32 grid text-center lg:max-w-5xl  lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
       
         {LINKS.map(({ title, href, description }) => (
-          < DynamicCard href={href} key={title} title={title}>
+          < Card href={href} key={title} title={title}>
             {description}
-          </ DynamicCard>
+          </ Card>
         ))}
       
       </div>

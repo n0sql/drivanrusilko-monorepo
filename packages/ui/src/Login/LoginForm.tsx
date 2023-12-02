@@ -15,15 +15,17 @@ const LoginForm = ({ useSiteWideContext }: any) => {
 
         {/* forgot your password */}
         <div className="text-right">
-          <span
-            className="text-[#6f50cb] font-bold text-sm"
+          <a
+          type="button"
+
+            className="text-[#6f50cb] font-bold text-sm cursor-pointer"
             onClick={() => {
               toggleAuthView("resetPw")
 
             }}
           >
-            Forgot your password?
-          </span>
+            Forgot your password? 
+          </a>
         </div>
         <div className=" form-submit">
           <input

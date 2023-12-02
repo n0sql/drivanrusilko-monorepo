@@ -37,6 +37,8 @@ interface SiteWideContextType {
     confirmPassword: string;
     handleResetPassword: (e:any, id:string) => void;
     handleConfirmPasswordChange: (e:any) => void;
+    openTreatementModal: boolean;
+    toggleTreatmentModal: ()=> void;
  }
  export type Viewkey = 'main' | 'treatment' | 'shop' | 'meet';
 
@@ -63,7 +65,8 @@ interface SiteWideContextType {
     const [openLogin, setOpenLogin] = useState(false);
     const [openSignup, setOpenSignup] = useState(false);
     const [openForgotPassword, setOpenForgotPassword] = useState(false);
-
+    const [openTreatementModal, setOpenTreatmentsModal] = useState(false);
+    const toggleTreatmentModal = () => setOpenTreatmentsModal(!openTreatementModal);
     useEffect(()=>{
         const viewMap = {
                         'main': setMainView,
@@ -157,6 +160,34 @@ interface SiteWideContextType {
           });
         });
       };
+        // on scroll id makesticky should have a class of sticky the image with id treatmentimg should have a class of hidden
+
+  const callback = (entries: any) => {
+    if (entries[0].isIntersecting) {
+      document?.getElementById("treatimg")?.classList.add("hidden");
+
+      document?.getElementById("closebtn")?.classList.add("mt-16");
+      document?.getElementById("myhead")?.classList.add("shadow");
+      document?.getElementById("myhead")?.classList.add("shadow-xl");
+    } else {
+      console.log(entries[0]);
+      document?.getElementById("treatimg")?.classList.remove("hidden");
+
+      document?.getElementById("closebtn")?.classList.remove("mt-16");
+      document?.getElementById("myhead")?.classList.remove("shadow");
+      document?.getElementById("myhead")?.classList.remove("shadow-xl");
+    }
+  };
+
+  useEffect(() => {
+    const options = {
+      root: document?.querySelector("#offcanvasTreatment"),
+      threshold: 0.5,
+    };
+    const observer = new IntersectionObserver(callback, options);
+    const targetEl = document?.querySelector("[data-te-sidenav-menu-ref]");
+    observer.observe(targetEl as Element);
+  },[]);
     
     return(
         <SiteWideContext.Provider
@@ -188,7 +219,9 @@ interface SiteWideContextType {
     handleResetPassword,
     handleConfirmPasswordChange,
     authView,
-    toggleAuthView
+    toggleAuthView,
+    openTreatementModal,
+    toggleTreatmentModal
         }}
         >
 {children}
