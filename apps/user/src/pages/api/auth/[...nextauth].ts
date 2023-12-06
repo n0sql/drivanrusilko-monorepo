@@ -23,7 +23,7 @@ export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
     res,
     { 
       adapter: PrismaAdapter(prisma),
-      secret: process.env.NEXTAUTH_SECRET,
+     
       providers: [
 
         CredentialsProvider({
@@ -147,6 +147,7 @@ export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
           }
         },
       },
+      secret: "2745750c51d49121d965c22c624157c5"
     } satisfies AuthOptions,
   ] as const;
 }
