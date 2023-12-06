@@ -108,7 +108,7 @@ export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
           return true;
         },
       },
-      secret: process.env.NEXTAUTH_SECRET,
+      NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
       NEXTAUTH_URL: process.env.NEXTAUTH_URL_ME,
       jwt: {
         maxAge: 60 * 60 * 24 * 30,
