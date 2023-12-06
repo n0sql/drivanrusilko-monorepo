@@ -21,8 +21,7 @@ export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
   return [
     req,
     res,
-    {
-      
+    { 
       adapter: PrismaAdapter(prisma),
       providers: [
 
@@ -109,8 +108,8 @@ export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
           return true;
         },
       },
-     secret: process.env.NEXTAUTH_SECRET,
      useSecureCookies : process.env.NEXTAUTH_URL?.startsWith("https"),
+      
       jwt: {
         maxAge: 60 * 60 * 24 * 30,
         async encode(params) {
