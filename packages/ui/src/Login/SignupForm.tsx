@@ -1,28 +1,34 @@
 import { Input } from "../input";
+import AcceptTerms from "../acceptterms";
 const SignupForm = ({ useSiteWideContext }: any) => {
-  const { handleSubmit, response, 
-     handleEmailChange, handlePassWordChange, toggleAuthView } = useSiteWideContext()
+  const { handleSignUpSubmit, response, 
+     handleEmailChange, handlePassWordChange, toggleAuthView, 
+     handleUsernameChange, 
+     handleAcceptTerms 
+    } = useSiteWideContext()
 
 
   return (
     <div className=" mx-auto">
       {response !== null ? (
         <div className="text-center text-primary font-bold mb-5">
-          {response === "User created"
-            ? "User Created check your email for verification link"
-            : "Error Creating User please try again"}
+          {response}
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="form flex flex-col justify-between gap-y-4">
+        <form onSubmit={handleSignUpSubmit} className="form flex flex-col justify-between gap-y-4">
           <h4 className="text-left  text-primary font-bold">Welcome</h4>
-         
+          <div className="relative text-center ">
+          <Input value="username"  type="text" changeHandler={handleUsernameChange} label="Username"/>
+          </div>
           <div className="relative text-center ">
           <Input value="email" type="text" changeHandler={handleEmailChange} label="Email"/>
           </div>
           <div className="relative  text-center ">
           <Input value="password" type="password" changeHandler={handlePassWordChange} label="Password"/>
           </div>
-
+          <div className="relative  text-center ">
+            <AcceptTerms handleAcceptTerms={handleAcceptTerms} />
+          </div>
           <div className="mb-5 form-submit">
             <input
               type="submit"

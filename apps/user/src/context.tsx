@@ -39,12 +39,18 @@ interface SiteWideContextType {
     handleConfirmPasswordChange: (e:any) => void;
     openTreatementModal: boolean;
     toggleTreatmentModal: ()=> void;
+    username: string;
+    handleUsernameChange: (e:any) => void;
+    acceptTerms: boolean;
+    handleAcceptTerms: (accepted: boolean)=> void;
  }
  export type Viewkey = 'main' | 'treatment' | 'shop' | 'meet';
 
  export const SiteWideContext = createContext<SiteWideContextType>({} as SiteWideContextType);
 
  export const SiteWideContextProvider =({children}: {children: React.ReactNode}) => {
+    const [acceptTerms, setAcceptTerms] = useState(false);
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [emailSent, setEmailSent] = useState(false);
     const [password, setPassword] = useState("");
@@ -87,15 +93,16 @@ interface SiteWideContextType {
                 
     }, [authView])
     
+    const handleUsernameChange = (e:any) =>{ setUsername(e.target.value)};
+    const handleAcceptTerms = (accepted: boolean) =>{ setAcceptTerms(accepted)};
+    const handleEmailChange = (e:any) =>{ setEmail(e.target.value)};
+    const handlePassWordChange = (e:any) => {setPassword(e.target.value)};
+    const handleConfirmPasswordChange= (e:any)=>{setConfirmPassword(e.target.value)};
     const handleLogin = (e: any) => {
         e.preventDefault();
-        const email = e.currentTarget.email.value;
-        const password = e.currentTarget.password.value;
         signIn("credentials", {
-          redirect: false,
           email,
           password,
-          
         });
       };
       const noEmailSent =()=>{
@@ -118,18 +125,18 @@ interface SiteWideContextType {
           });
         });
       };
-      const handleEmailChange = (e:any) =>{ setEmail(e.target.value)}
-      const handlePassWordChange = (e:any) => {setPassword(e.target.value)}
-      const handleConfirmPasswordChange= (e:any)=>{setConfirmPassword(e.target.value)}
+
     
       const handleSignUpSubmit = async (e: any) => {
         e.preventDefault();
-       
+        console.log(username, email, password);
         await fetch("/api/auth/register", {
           method: "POST",
           body: JSON.stringify({
+            username,
             email,
             password,
+            acceptTerms
           }),
         }).then((res) => {
           res.text().then((text) => {
@@ -221,7 +228,11 @@ interface SiteWideContextType {
     authView,
     toggleAuthView,
     openTreatementModal,
-    toggleTreatmentModal
+    toggleTreatmentModal,
+    username,
+    handleUsernameChange,
+    acceptTerms,
+    handleAcceptTerms
         }}
         >
 {children}

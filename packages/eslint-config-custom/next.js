@@ -41,7 +41,6 @@ module.exports = {
   // add rules configurations here
   rules: {
     "import/no-default-export": "off",
-
     'no-console': 'off',
     '@typescript-eslint/no-confusing-void-expression': 'off',
     'camelcase': 'off',
@@ -95,7 +94,10 @@ module.exports = {
     "react/jsx-curly-brace-presence":"off",
     "react/hook-use-state":"off",
     "react-hooks/exhaustive-deps":"off",
-    "object-shorthand":"off"
+    "object-shorthand":"off",
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
+    "turbo/no-undeclared-env-vars": "off",
+    "@typescript-eslint/require-await": "off",
 
   },
 };
