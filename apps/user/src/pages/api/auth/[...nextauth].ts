@@ -8,7 +8,6 @@ import { decode, encode } from "next-auth/jwt";
 import { getCookie, setCookie } from "cookies-next";
 import bcrypt from "bcrypt";
 import { NextApiRequest, NextApiResponse } from "next"
-import { er } from '@fullcalendar/core/internal-common';
 
 
 const prisma = new PrismaClient();
