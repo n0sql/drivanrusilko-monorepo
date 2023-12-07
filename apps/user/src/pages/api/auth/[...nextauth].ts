@@ -41,7 +41,7 @@ export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
 
               const { email, password } = result.data;
 
-              const user = await prisma.user.findUnique({
+              const user = await prisma.user.findFirst({
                 where: {
                   email,
                 },
