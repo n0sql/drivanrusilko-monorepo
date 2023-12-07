@@ -8,6 +8,7 @@ import { decode, encode } from "next-auth/jwt";
 import { getCookie, setCookie } from "cookies-next";
 import bcrypt from "bcrypt";
 import { NextApiRequest, NextApiResponse } from "next"
+import { er } from '@fullcalendar/core/internal-common';
 
 
 const prisma = new PrismaClient();
@@ -71,9 +72,8 @@ export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
                 error instanceof Prisma.PrismaClientInitializationError ||
                 error instanceof Prisma.PrismaClientKnownRequestError
               ) {
-                throw new Error("System error. Please contact support");
+                throw new Error(error.message);
               }
-              console.log(error);
               throw error;
             }
           },
