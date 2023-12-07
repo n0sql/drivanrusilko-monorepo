@@ -73,7 +73,7 @@ export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
               ) {
                 throw new Error("System error. Please contact support");
               }
-
+              console.log(error);
               throw error;
             }
           },
