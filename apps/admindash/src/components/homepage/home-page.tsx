@@ -1,6 +1,9 @@
+import React from "react";
 import Image from "next/image";
+import { useSiteWideContext } from "../../context";
 import { Card } from "ui";
 
+// const menus = ["About Us", "How it Works", "Our Medical Experts", "Reviews"];
 function Gradient({
   conic,
   className,
@@ -17,7 +20,8 @@ function Gradient({
       } ${conic ? "bg-glow-conic" : ""} ${className}`}
     />
   );
-} 
+}
+
 
 
 const LINKS = [
@@ -43,14 +47,40 @@ const LINKS = [
       " Instantly deploy your Turborepo to a shareable URL with Vercel.",
   },
 ];
+export default function HomePage():JSX.Element{
+const {toggleTreatmentModal} = useSiteWideContext()
 
-export default function Page(): JSX.Element {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+    return(
+        <div className="mt-12 relative">
+           
+            
+         
+      <div className="flex z-50 relative  lg:flex-row flex-col items-center lg:items-start justify-between">
+        <div className="flex flex-col mb-12">
+          <h1 className="text-primary ">Personalized, doctor-backed</h1>
+          <h1 className="text-[#8f8f8f]">treatment plans</h1>
+        </div>
+        
+
+        <div className="flex flex-col text-gray-200 gap-5 ">
+          <h1 className="text-[#8f8f8f]">
+            Finding what works can be hard. Our online process and <br /> medical experts make it
+            simple.
+          </h1>
+
+          <a
+          type="button"
+           onClick= {()=>{toggleTreatmentModal();}}
+            className="px-4 py-2 bg-[#222030] rounded-full cursor-pointer  lg:w-48  text-center w-full mb-6"
+          >
+            Find my treatment
+          </a>
+        </div>
+      </div>
+      {/* <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed px-4 left-0 top-0 flex w-full justify-center border-b bg-gradient-to-b pb-6 pt-8 backdrop-blur-2xl border-neutral-800 bg-zinc-800/30 from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:bg-zinc-800/30">
           examples/with-tailwind -&nbsp;
-          <code className="font-mono font-bold">web</code>
+          <code className="font-mono font-bold">docs</code>
         </p>
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-black via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
           <a
@@ -70,7 +100,7 @@ export default function Page(): JSX.Element {
             />
           </a>
         </div>
-      </div>
+      </div> */}
 
       <div className="relative flex place-items-center ">
         <div className="font-sans w-auto pb-16 pt-[48px] md:pb-24 lg:pb-32 md:pt-16 lg:pt-20 flex justify-between gap-8 items-center flex-col relative z-0">
@@ -126,14 +156,15 @@ export default function Page(): JSX.Element {
           </div>
         </div>
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+      <div className="mb-32 grid text-center lg:max-w-5xl  lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+      
         {LINKS.map(({ title, href, description }) => (
-          <Card href={href} key={title} title={title}>
+          < Card href={href} key={title} title={title}>
             {description}
-          </Card>
+          </ Card>
         ))}
+      
       </div>
-    </main>
-  );
+    </div>
+    )
 }
