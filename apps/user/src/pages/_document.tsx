@@ -8,11 +8,10 @@ export default function Document() {
       <body>
         <Main />
         <NextScript/>
-        <script src="/tailwindcss.js"  
-       />
+        
       </body>
      
-     
+      <script src="/tailwindcss.js"/>
     </Html>
   );
 }
