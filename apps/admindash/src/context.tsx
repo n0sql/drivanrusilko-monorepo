@@ -49,7 +49,7 @@ interface SiteWideContextType {
  export const SiteWideContext = createContext<SiteWideContextType>({} as SiteWideContextType);
 
  export const SiteWideContextProvider =({children}: {children: React.ReactNode}) => {
-    const [acceptTerms, setAcceptTerms] = useState(false);
+    const [acceptTerms, setAcceptTerms] = useState(true);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [emailSent, setEmailSent] = useState(false);

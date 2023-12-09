@@ -11,6 +11,7 @@
   
   "include": [
     "next-env.d.ts",
+    "next-auth.d.ts",
     "global.d.ts",
     "**/*.ts",
     "**/*.tsx",

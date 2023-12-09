@@ -39,7 +39,10 @@ export default async function handler(
           email,
           name: username,
           password: passwordHash,
+          role: "ADMIN",
         },
+        
+         
       });
 
       await tx.account.create({
@@ -50,8 +53,14 @@ export default async function handler(
           providerAccountId: id,
         },
       });
+
+
     });
 
+   
+    
+    // UPDATE ROLE HERE AS ADMIN
+      
     return res.status(201).json({
       message: "User created successfully.",
     });

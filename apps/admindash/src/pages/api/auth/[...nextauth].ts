@@ -65,6 +65,7 @@ export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
                 email: user.email,
                 image: user.image,
                 name: user.name,
+                role: user.role,
               };
             } catch (error) {
               if (
