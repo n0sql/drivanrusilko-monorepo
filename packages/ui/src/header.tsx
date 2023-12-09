@@ -1,7 +1,8 @@
 
-export function Header ({children, classNam,useSiteWideContext}:
-    {children: React.ReactNode, classNam:any,useSiteWideContext:any}):JSX.Element {
+export function Header ({children, classNam,useSiteWideContext,session, signOut, loggedInMenu}:
+    {children: React.ReactNode, classNam:any,useSiteWideContext:any, session:any, signOut:any,loggedInMenu:any }):JSX.Element {
     const {toggleHomeModal} = useSiteWideContext();
+
       return(  
         
         <div className={` w-full fixed top-0 left-0 z-[100]`}>
@@ -10,6 +11,25 @@ export function Header ({children, classNam,useSiteWideContext}:
           id="navbarSupportedContentX"
           data-te-navbar-ref
         >
+          {
+            session && (
+              <div className="flex items-center justify-center gap-2">
+                {loggedInMenu.map((item:string, i:number) => (
+                  <a
+                    key={i}
+                    href={`/${item.toLowerCase()}`}
+                    className="hover:bg-gray-100 dark:hover:bg-gray-950 text-gray-700 dark:text-gray-100 text-sm font-bold py-1 px-4 rounded-full"
+                  >
+                    {item}
+                  </a>
+                ))}
+                <button
+                  className="hover:bg-gray-100 dark:hover:bg-gray-950 text-gray-700 dark:text-gray-100 text-sm font-bold py-1 px-4 rounded-full"
+                  onClick={() => signOut()}></button>
+              </div>
+            ) 
+
+          }
           <div data-te-nav-item-ref>
             <a
               data-te-ripple-init

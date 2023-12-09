@@ -1,5 +1,4 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import Script from "next/script";
 
 export default function Document() {
   return (
@@ -11,7 +10,7 @@ export default function Document() {
         
       </body>
      
-      <script src="/tailwindcss.js"/>
+      <script src="https://unpkg.com/tailwindcss-cdn@3.3.4/tailwindcss.js"/>
     </Html>
   );
 }

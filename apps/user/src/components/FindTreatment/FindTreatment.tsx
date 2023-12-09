@@ -4,10 +4,9 @@ import {  Sofia_Sans } from "next/font/google";
 import {
   Drawer,
 } from "@material-tailwind/react";
-import { useSiteWideContext } from "../../context";
 import { menus } from "../../data/data";
 const sofi = Sofia_Sans({subsets: ["latin"]})
-const FindTreatment = () => {
+const FindTreatment = ({useSiteWideContext}:{useSiteWideContext:any} ) => {
 
 const {openTreatementModal, toggleTreatmentModal} = useSiteWideContext();
   return (
