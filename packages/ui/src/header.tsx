@@ -13,7 +13,7 @@ export function Header ({children, classNam,useSiteWideContext,session, signOut,
         >
           {
             session && (
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex items-center justify-center gap-2 order-3 lg:order-1 md:order-3 md:mx-auto">
                 {loggedInMenu.map((item:string, i:number) => (
                   <a
                     key={i}

@@ -28,9 +28,6 @@ export default function HomePage():JSX.Element{
     return(
         <div className="mt-24 relative">
       <div className="relative flex place-items-center ">
-        
-          
-           {/*add Authform*/}
            
           <div className=" flex items-center justify-center w-full">
           <AuthForm/>
