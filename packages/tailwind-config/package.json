@@ -2,9 +2,11 @@
   "name": "tailwind-config",
   "version": "0.0.0",
   "private": true,
-  "main": "index.ts",
-  "types": "index.ts",
+  "exports": {
+    "./tailwind.config.ts": "./tailwind.config.ts"
+  },
   "devDependencies": {
+    "tsconfig": "*",
     "tailwindcss": "3.3.5"
   }
 }

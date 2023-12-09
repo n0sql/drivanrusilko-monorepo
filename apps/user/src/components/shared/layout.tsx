@@ -1,5 +1,4 @@
 import {  Sofia_Sans } from "next/font/google";
-
 import {MainDrawer, Header, Login} from "ui";
 import FindTreatment from "../FindTreatment/FindTreatment";
 import { useSiteWideContext } from "../../context";

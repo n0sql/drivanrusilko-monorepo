@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 
-const config: Config = {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx,mjs}","./node_modules/@material-tailwind/react/components/*.{js,ts,jsx,tsx}",],
+const config: Omit<Config, "content" | "darkMode"> = {
   theme: {
     extend: {
       backgroundImage: {
@@ -10,7 +9,6 @@ const config: Config = {
       },
     },
   },
-  darkMode: "class",
   plugins: [],
 };
 export default config;

@@ -3,8 +3,11 @@
 import type { Config } from "tailwindcss";
 import sharedConfig from "tailwind-config/tailwind.config.ts";
 
-const config: Pick<Config, "presets"> = {
+const config: Pick<Config, "content" | "presets" | "darkMode"> = {
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}","../../node_modules/@material-tailwind/react/**/*.{js,ts,jsx,tsx}", "../../packages/ui/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   presets: [sharedConfig],
+
 };
 
 export default config;

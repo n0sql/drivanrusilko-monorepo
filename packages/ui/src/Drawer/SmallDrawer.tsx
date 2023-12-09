@@ -5,7 +5,7 @@ const SmallDrawer = ({useSiteWideContext}:{useSiteWideContext:any}) => {
   
   
     return (
-      <div className="ui-flex ui-flex-col  justify-between">
+      <div className="flex flex-col  justify-between">
         
         <ul className="list-none px-6 space-y-2 flex flex-col ">
           {/* <div className="flex flex-col mb-6 gap-5"> */}
