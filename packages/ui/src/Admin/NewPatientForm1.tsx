@@ -8,7 +8,7 @@ const NewPatientForm1 = () => {
       action="#"
       className="max-w-2xl ml-64 mt-5 bg-gray-50 shadow shadow-lg border rounded-lg px-3 py-3"
     >
-      <h3 className="mb-6 font-medium leading-none text-gray-900 dark:text-white ">
+      <h3 className="mb-6 font-medium leading-none text-gray-900 dark:text-white">
         Important Information
       </h3>
       <div className="grid gap-4 mb-4 sm:grid-cols-2">

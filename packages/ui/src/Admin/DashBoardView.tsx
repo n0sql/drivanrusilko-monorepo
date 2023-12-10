@@ -1,8 +1,8 @@
 
 import { ArrowUpIcon } from "@heroicons/react/24/outline";
-const DashBoardView = ({ categories }: any) => {
+const DashBoardView = () => {
   return (
-    <main className="p-4 md:ml-64 h-auto pt-20">
+    <main className="p-4  h-auto pt-20"> 
       <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
       <div className="border rounded rounded-lg  dark:border-gray-600 mb-4">
         <section className="bg-white dark:bg-gray-900 rounded rounded-lg shadow">
@@ -16,7 +16,7 @@ const DashBoardView = ({ categories }: any) => {
               </p>
             </div>
             <div className="hidden lg:mt-0 lg:col-span-5 lg:flex h-48">
-              <img src="/stethoscope.jpg" alt="mockup" />
+              <img src="/stethoscope.jpg" className="w-full" alt="mockup" />
             </div>
           </div>
         </section>
