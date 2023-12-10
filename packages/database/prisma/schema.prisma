@@ -50,17 +50,40 @@ model User {
   accounts      Account[]
   sessions      Session[]
   role          Role    @default(USER)
+  serverConfig  ServerConfig[]
 }
 
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
-
   @@unique([identifier, token])
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+model ServerConfig {
+ id String  @id @default(cuid())
+ basePath String
+ hospitalName String @unique
+ userId String @default("")
+ providerId String?
+ providerName String?
+ locationUuid String?
+ locationTag String?
+ childLocations ChildLocation[]
+ username String @default("admin")
+ password String @default("Admin123")
+ user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ChildLocation {
+  id String  @id @default(cuid())
+  name String
+  uuid String
+  parentLocationName String
+  serverConfig ServerConfig @relation(fields: [parentLocationName], references: [hospitalName], onDelete: Cascade)
 }

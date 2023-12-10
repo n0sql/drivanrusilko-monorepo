@@ -5,6 +5,9 @@
     "types": "./src/index.ts",
     "dependencies": {
         "fhir": "4.12.0",
-        "typescript": "^5.2.2"
+        "typescript": "^5.2.2",
+        "js-base64": "^3.7.5",
+        "node-fetch": "^3.1.0",
+        "database": "*"
     }
 }

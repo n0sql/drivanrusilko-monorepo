@@ -56,10 +56,6 @@ export default async function handler(
 
 
     });
-
-   
-    
-    // UPDATE ROLE HERE AS ADMIN
       
     return res.status(201).json({
       message: "User created successfully.",
