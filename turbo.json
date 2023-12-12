@@ -21,6 +21,7 @@
       "cache": false
     },
     "db:generate": {
+      "dotEnv": [".env"],
       "cache": false
     },
     "db:push": {

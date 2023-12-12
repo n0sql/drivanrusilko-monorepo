@@ -24,7 +24,7 @@ export async function checkParentLocation (token:string, sessionId:string,  loca
     const myHeaders = new Headers();
     myHeaders.append("Authorization", "Basic " + token);
     myHeaders.append("Cookie", "JSESSIONID=" + sessionId);
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Content-Type", "application/json");   
 
    try {
     const locationResponse = await fetch(`/ws/rest/v1/location?q=${locationName}&v=default`, {method: 'GET', headers: myHeaders, redirect: 'follow' as RequestRedirect})

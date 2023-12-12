@@ -10,7 +10,7 @@ export default async function handler(
 
     const {locationName, person, user} = JSON.parse(req.body)
     const serverConfig  = await prisma.serverConfig.findUnique({where: {hospitalName: locationName}})
-     if ( serverConfig?.username && serverConfig?.password )
+     if ( serverConfig?.username && serverConfig?.password)
      {
         const credentials = await openmrsSessionManager.initializeSession({username: serverConfig.username, password:serverConfig.password});
         if (credentials)
