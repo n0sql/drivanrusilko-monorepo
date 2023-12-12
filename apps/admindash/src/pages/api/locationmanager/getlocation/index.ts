@@ -22,12 +22,9 @@ export default async function handler(
                 res.status(200).json({location: location})
             }
             else {
-                res.status(302).redirect('/admin/createparentlocation')
+                res.status(301).redirect('/admin/createparentlocation')
             }
-            
-
      }
-     res.status(302).redirect('/serverconfig')
+     res.status(301).redirect('/server-onboarding')
   }
-
   }

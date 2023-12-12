@@ -10,11 +10,7 @@ import bcrypt from "bcrypt";
 import { NextApiRequest, NextApiResponse } from "next"
 
 
-const prisma = new PrismaClient(
-  {
-    datasourceUrl: process.env.DATABASE_URL,
-  }
-);
+const prisma = new PrismaClient();
 
 export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
   const isCredentialsCallback =
@@ -63,7 +59,10 @@ export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
               if (!passwordsMatch) {
                 throw new Error("Password is not correct");
               }
-
+              if (user?.role !== "ADMIN") {
+                throw new Error("You are not an admin");
+              }
+              console.log(user);
               return {
                 id: user.id,
                 email: user.email,
@@ -92,7 +91,7 @@ export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
             if (user) {
               const sessionToken = randomUUID();
               const sessionExpiry = new Date(
-                Date.now() + 60 * 60 * 24 * 30 * 1000
+                Date.now() + 60 * 60 * 24 * 1 * 1000
               );
 
               await prisma.session.create({

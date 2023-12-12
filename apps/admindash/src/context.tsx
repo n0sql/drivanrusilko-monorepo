@@ -98,13 +98,18 @@ interface SiteWideContextType {
     const handleEmailChange = (e:any) =>{ setEmail(e.target.value)};
     const handlePassWordChange = (e:any) => {setPassword(e.target.value)};
     const handleConfirmPasswordChange= (e:any)=>{setConfirmPassword(e.target.value)};
-    const handleLogin = (e: any) => {
+    const handleLogin = async (e: any) => {
         e.preventDefault();
-        signIn("credentials", {
-          email,
-          password,
-        });
-      };
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      if (result?.error) {
+        setResponse(result.error);
+      } else {
+        window.location.href = "/server-onboarding";
+      }}
       const noEmailSent =()=>{
         setEmailSent(false);
       }

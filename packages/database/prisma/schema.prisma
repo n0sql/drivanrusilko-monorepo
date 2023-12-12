@@ -69,7 +69,7 @@ model ServerConfig {
  id String  @id @default(cuid())
  basePath String
  hospitalName String @unique
- userId String @default("")
+ userId String
  providerId String?
  providerName String?
  locationUuid String?

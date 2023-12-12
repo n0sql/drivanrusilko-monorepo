@@ -6,12 +6,18 @@ export default async function handler(
     res: NextApiResponse
   ) {
 
-   const {hospitalName} = JSON.parse(req.body)
-   const serverConfig  = await prisma.serverConfig.findUnique({where: {hospitalName: hospitalName}})
-   if (serverConfig?.basePath && serverConfig?.hospitalName)
+
+try {
+   const serverConfig  = await prisma.serverConfig.findMany()
+   if (serverConfig[0]?.basePath && serverConfig[0]?.hospitalName)
      {
         res.status(200).json({serverConfig: serverConfig})
 
      }
-     res.status(302).redirect('/admin/createserverconfig')
+       else {
+          res.status(400).json({error: 'No server config found'})
+       }
+} catch (error) {
+   res.status(400).json({error: 'No server config found'})
+}
   }

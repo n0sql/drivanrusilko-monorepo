@@ -3,11 +3,7 @@ import bcrypt from "bcrypt";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { registerSchema } from "validation";
 
-const prisma = new PrismaClient(
-  {
-    datasourceUrl: process.env.DATABASE_URL,
-  }
-);
+const prisma = new PrismaClient();
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

@@ -40,5 +40,5 @@ export default async function handler(
         }
 
      }
-     res.status(302).redirect('/admin/createserverconfig')
+     res.status(301).redirect('server-onboarding')
   }

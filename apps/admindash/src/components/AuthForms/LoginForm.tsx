@@ -1,11 +1,13 @@
 import { Input } from "ui";
 import { useSiteWideContext } from "../../context";
 const LoginForm = () => {
- const { handleLogin, toggleAuthView,handleEmailChange, handlePassWordChange,  } = useSiteWideContext()
+ const { handleLogin, toggleAuthView,handleEmailChange, handlePassWordChange } = useSiteWideContext()
   return (
-    <div className="mx-auto ">
+    <div className="mx-auto">
       <h4 className="text-left  text-primary font-bold mb-2">Welcome Back</h4>
-      <form onSubmit={handleLogin} className="flex flex-col justify-between gap-y-4">
+      <form onSubmit={(e:any)=> {
+        handleLogin(e)
+      }} className="flex flex-col justify-between gap-y-4">
       <div className="relative text-center ">
           <Input value="email" type="text" changeHandler={handleEmailChange} label="Email"/>
           </div>

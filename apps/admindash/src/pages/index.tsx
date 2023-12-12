@@ -8,7 +8,7 @@ export default function MyPage(){
   React.useEffect(() => {
     if (session) {
       console.log(session)
-      router.push("/admin")
+      router.push("/server-onboarding", undefined, { shallow: true });
     }
   }
   , [session])

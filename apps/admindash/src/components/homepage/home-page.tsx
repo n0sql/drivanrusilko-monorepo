@@ -27,8 +27,7 @@ export default function HomePage():JSX.Element{
 
     return(
         <div className="mt-24 relative">
-      <div className="relative flex place-items-center ">
-           
+      <div className="relative flex place-items-center">
           <div className=" flex items-center justify-center w-full">
           <AuthForm/>
             <div className="absolute flex items-center justify-center w-64 h-64">
@@ -38,8 +37,6 @@ export default function HomePage():JSX.Element{
                 small
               />
             </div>
-
-           
           </div>
           <Gradient
             className="top-[-500px] opacity-[0.15] w-full h-full"

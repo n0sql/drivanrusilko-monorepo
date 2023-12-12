@@ -22,7 +22,7 @@ export default async function handler(
                 name: newPerson.givenName,
                 username:user.name,
                 description: "main administrator",
-                password: user.password,
+                password: user.password,                                                         
                 roles: [{"name": "Provider", "description": "main api account", "inheritedRoles":["8d94f852-c2cc-11de-8d13-0010c6dffd0f","8d94f280-c2cc-11de-8d13-0010c6dffd0f"]}],  
             }
             const newUser = await userManager.createUserFromPerson(newPerson, newUserData, myheaders, serverConfig.basePath);
@@ -33,7 +33,7 @@ export default async function handler(
           }
 
      }
-     res.status(302).redirect('/serverconfig')
+     res.status(301).redirect('/server-onboarding')
   }
 
   }
