@@ -12,10 +12,10 @@ export default async function handler(
     const serverConfig  = await prisma.serverConfig.findUnique({where: {hospitalName: locationName}})
      if ( serverConfig?.username && serverConfig?.password)
      {
-        const credentials = await openmrsSessionManager.initializeSession({username: serverConfig.username, password:serverConfig.password});
-        if (credentials)
+        const myheaders = await openmrsSessionManager.initializeSession({username:serverConfig.username, password:serverConfig.password, baseUrl: serverConfig.basePath});
+        if (myheaders)
         {
-          const newPerson = await userManager.createPerson(person, credentials.token, credentials.sessionId)
+          const newPerson = await userManager.createPerson(person, myheaders, serverConfig.basePath)
           if(newPerson)
           {
             const newUserData = {
@@ -25,7 +25,7 @@ export default async function handler(
                 password: user.password,
                 roles: [{"name": "Provider", "description": "main api account", "inheritedRoles":["8d94f852-c2cc-11de-8d13-0010c6dffd0f","8d94f280-c2cc-11de-8d13-0010c6dffd0f"]}],  
             }
-            const newUser = await userManager.createUserFromPerson(newPerson, newUserData, serverConfig.username, serverConfig.password)
+            const newUser = await userManager.createUserFromPerson(newPerson, newUserData, myheaders, serverConfig.basePath);
             if(newUser)
             {
                 res.status(200).send({provider: newUser})

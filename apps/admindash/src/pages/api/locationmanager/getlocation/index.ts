@@ -12,11 +12,11 @@ export default async function handler(
      
      if (serverConfig?.basePath && serverConfig?.hospitalName)
      {
-        const credentials = await openmrsSessionManager.initializeSession({username:serverConfig.username, password:serverConfig.password});
-        if (credentials)
+        const myheaders = await openmrsSessionManager.initializeSession({username:serverConfig.username, password:serverConfig.password, baseUrl: serverConfig.basePath})
+        if (myheaders)
         {
           
-            const location = await locationManager.checkParentLocation(credentials.token, credentials.sessionId, locationName);
+            const location = await locationManager.checkParentLocation(myheaders,  locationName, serverConfig.basePath);
 
             if (location) {
                 res.status(200).json({location: location})

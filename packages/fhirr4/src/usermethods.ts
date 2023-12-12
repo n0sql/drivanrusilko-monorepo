@@ -1,11 +1,8 @@
 
-export async function createPerson( person: Person, token: string, sessionId: string) {
-  var myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${token}`);
-  myHeaders.append("Cookie", `JSESSIONID=${sessionId}`);
-  myHeaders.append("Content-Type", "application/json");
+export async function createPerson( person: Person, myHeaders: Headers, baseUrl: string) {
+  
 //  first we have to check if the person exists
-    const personExists = await searchPersonByName(person.names[0].givenName, token, sessionId);
+    const personExists = await searchPersonByName(person.names[0].givenName, myHeaders, baseUrl);
     if (personExists.results.length > 0) {
         return personExists.results[0];
     }
@@ -19,45 +16,13 @@ export async function createPerson( person: Person, token: string, sessionId: st
       redirect: 'follow' as RequestRedirect
     };
   
-    const response = await fetch("/openmrs/ws/v1/Person", requestOptions)
+    const response = await fetch(`${baseUrl}/ws/v1/person`, requestOptions)
     const result = await response.json();
     return result
  }
 }
 
-// a person data looks like this:
-// names	Array[] : names	List of names
-// gender	String	The patient's gender ("M" for male, "F" for female, or "U" for unknown)
-// age	Integer	The estimated age in years. Used when birthdate is unknown.
-// birthDate	String	Date of birth of a person
-// birthDateEstimated	Boolean	True if the birthdate is estimated; false if birthdate is accurate.
-// birthTime	String	The time of birth of the person
-// dead	Boolean	True if the patient is dead.
-// deathDate	String	Date of death of the person
-// causeOfDeath	Concept UUID	Reason for the death of the person
-// deathdateEstimated	Boolean	true if deathDate is estimate; false if deathDate is accurate
-// addresses	Array[] : addresses	The address details aggregated in an array
-// attributes	Array[] : attributes	The attribute details aggregated in an array
 
-// sample addressses looks like this 
-// "addresses": [
-//     {
-//     "address1": "30, Vivekananda Layout, Munnekolal,Marathahalli",
-//     "cityVillage": "Bengaluru",
-//     "country": "India",
-//     "postalCode": "560037"
-//     }
-// ]
-
-// create an interface for the person data
-
-// also names looks like this
-// "names": [
-//     {
-//     "givenName": "Mohit",
-//     "familyName": "Kumar"
-//     }
-// ],
 export interface Address {
     preferred: boolean,
     address1: string,
@@ -90,10 +55,8 @@ export interface Person {
     attributes: any[]
 }
 
-export async function searchPersonByName(name: string, token: string, sessionId: string) {
-  var myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${token}`);
-  myHeaders.append("Cookie", `JSESSIONID=${sessionId}`);
+export async function searchPersonByName(name: string, myHeaders: Headers, baseUrl: string) {
+
 
   var requestOptions = {
     method: 'GET',
@@ -102,7 +65,7 @@ export async function searchPersonByName(name: string, token: string, sessionId:
 };
 
 try {
-    const response = await fetch(`/openmrs/ws/rest/v1/person?q=${name}`, requestOptions)
+    const response = await fetch(`${baseUrl}/ws/rest/v1/person?q=${name}`, requestOptions)
   const result = await response.json();
   return result
   } catch (error) {
@@ -111,11 +74,8 @@ try {
   }
 }
 
-export async function  searchUserByName(name: string, token: string, sessionId: string) {
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-    myHeaders.append("Cookie", `JSESSIONID=${sessionId}`);
-    
+export async function  searchUserByName(name: string, myHeaders: Headers,baseUrl: string) {
+
     var requestOptions = {
         method: 'GET',
         headers: myHeaders,
@@ -123,7 +83,7 @@ export async function  searchUserByName(name: string, token: string, sessionId: 
     };
     
     try {
-        const response = await fetch(`/openmrs/ws/rest/v1/user?q=${name}`, requestOptions)
+        const response = await fetch(`${baseUrl}/ws/rest/v1/user?q=${name}`, requestOptions)
         const result = await response.json();
         return result
     } catch (error) {
@@ -152,15 +112,11 @@ export async function  searchUserByName(name: string, token: string, sessionId: 
         roles: any[],
     }
 
-export async function createUserFromPerson(person:Person, userdata: Omit<User, "person" >, token:string, sessionId:string) {
-    const userExists = await searchUserByName(userdata.username, token, sessionId);
+export async function createUserFromPerson(person:Person, userdata: Omit<User, "person" >, myHeaders: Headers, baseUrl: string) {
+    const userExists = await searchUserByName(userdata.username, myHeaders, baseUrl);
     if (userExists.results.length > 0) {
         return userExists.results[0];
     }
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-    myHeaders.append("Cookie", `JSESSIONID=${sessionId}`);
-    myHeaders.append("Content-Type", "application/json");
     const user = {...userdata, person:person}
     var raw = JSON.stringify(user);
     
@@ -172,7 +128,7 @@ export async function createUserFromPerson(person:Person, userdata: Omit<User, "
     };
     
    try {
-    const response = await fetch("/openmrs/ws/rest/v1/user", requestOptions)
+    const response = await fetch("/ws/rest/v1/user", requestOptions)
     const result = await response.json();
     return result
    } catch (error) {

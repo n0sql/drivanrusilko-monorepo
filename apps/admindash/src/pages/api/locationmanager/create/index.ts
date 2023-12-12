@@ -12,12 +12,11 @@ export default async function handler(
      
      if (serverConfig?.basePath && serverConfig?.hospitalName)
      {
-        const credentials = await openmrsSessionManager.initializeSession({username:serverConfig.username, password:serverConfig.password})
-        if (credentials)
+        const myheaders = await openmrsSessionManager.initializeSession({username:serverConfig.username, password:serverConfig.password, baseUrl: serverConfig.basePath})
+        if (myheaders)
         {
           
-            
-            const newLocation = await locationManager.createParentLocation(credentials.token, credentials.sessionId, location, location.name);
+            const newLocation = await locationManager.createParentLocation(myheaders, location, location.name, serverConfig.basePath);
             if (newLocation) {
                 await prisma.serverConfig.update({where: {hospitalName: location.name}, data: {
                     locationUuid: newLocation.uuid,

@@ -1,33 +1,34 @@
-export async function getDefaultChildLocations(token:string, sessionId:string){
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic " + token);
-    myHeaders.append("Cookie", "JSESSIONID=" + sessionId);
+
+
+export async function getDefaultChildLocations(myHeaders: Headers, baseUrl: string){
+
     const requestOptions = {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow' as RequestRedirect
     };
 
-    
-    const visitLocationResponse = await fetch(`/ws/rest/v1/locationtag?q=Visit+Location`, requestOptions)
+    const visitLocationResponse = await fetch(`${baseUrl}/ws/rest/v1/locationtag?q=Visit+Location`, requestOptions)
     const visitLocationResult = await visitLocationResponse.json();
     const visitLocationUuid = visitLocationResult.results[0].uuid;
     const metadata = { locationTag: visitLocationUuid, childLocations: []};
-    const allChildLocationsResponse = await fetch(`/ws/rest/v1/location?tag=Login+Location`, requestOptions)
+    const allChildLocationsResponse = await fetch(`${baseUrl}/ws/rest/v1/location?tag=Login+Location`, requestOptions)
     const allChildLocationsResult = await allChildLocationsResponse.json();
     const allChildLocations = allChildLocationsResult.results;
     metadata['childLocations'] = allChildLocations;
     return metadata;
 }
 
-export async function checkParentLocation (token:string, sessionId:string,  locationName:string) {
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic " + token);
-    myHeaders.append("Cookie", "JSESSIONID=" + sessionId);
-    myHeaders.append("Content-Type", "application/json");   
+export async function checkParentLocation (myHeaders: Headers,  locationName:string, baseUrl: string) {
+
+    const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow' as RequestRedirect
+    };
 
    try {
-    const locationResponse = await fetch(`/ws/rest/v1/location?q=${locationName}&v=default`, {method: 'GET', headers: myHeaders, redirect: 'follow' as RequestRedirect})
+    const locationResponse = await fetch(`${baseUrl}/ws/rest/v1/location?q=${locationName}&v=default`, requestOptions)
     const locationResult = await locationResponse.json();
     if (locationResult.results.length > 0) {
         return locationResult.results[0]
@@ -41,17 +42,13 @@ export async function checkParentLocation (token:string, sessionId:string,  loca
 }
 
 
-export async function createParentLocation (token:string, sessionId:string, location:Location, locationName:string) {
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic " + token);
-    myHeaders.append("Cookie", "JSESSIONID=" + sessionId);
-    myHeaders.append("Content-Type", "application/json");
+export async function createParentLocation (myHeaders: Headers, location:Location, locationName:string, baseUrl: string) {
 
-    const locationExists = await checkParentLocation(token, sessionId, locationName);
+    const locationExists = await checkParentLocation(myHeaders, locationName, baseUrl);
     if (locationExists) {
         return locationExists;
     }
-    const metadata = await getDefaultChildLocations(token, sessionId);
+    const metadata = await getDefaultChildLocations(myHeaders, baseUrl);
 
     location.childLocations = metadata.childLocations.map((childLocation: any) => childLocation.uuid);
     location.tags = [metadata.locationTag];
@@ -65,7 +62,7 @@ export async function createParentLocation (token:string, sessionId:string, loca
     };
 
    try {
-    const locationResponse = await fetch("/ws/rest/v1/location", requestOptions);
+    const locationResponse = await fetch(`${baseUrl}/ws/rest/v1/location`, requestOptions);
     const locationResult = await locationResponse.json();
     return locationResult;
    } catch (error) {
