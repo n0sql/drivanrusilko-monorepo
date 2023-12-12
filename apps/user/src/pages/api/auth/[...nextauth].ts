@@ -10,7 +10,11 @@ import bcrypt from "bcrypt";
 import { NextApiRequest, NextApiResponse } from "next"
 
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient(
+  {
+    datasourceUrl: process.env.DATABASE_URL,
+  }
+);
 
 export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
   const isCredentialsCallback =
