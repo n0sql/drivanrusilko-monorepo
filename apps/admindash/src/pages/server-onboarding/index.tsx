@@ -3,18 +3,7 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSiteWideContext } from "../../context";
-// id String  @id @default(cuid())
-// basePath String
-// hospitalName String @unique
-// userId String
-// providerId String?
-// providerName String?
-// locationUuid String?
-// locationTag String?
-// childLocations ChildLocation[]
-// username String @default("admin")
-// password String @default("Admin123")
-// user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
 
  interface ServerDetails {
     basePath: string;
@@ -24,6 +13,7 @@ import { useSiteWideContext } from "../../context";
 }
 
 const ServerDetailsForm = () => {
+    const [calledPush, setCalledPush] = React.useState(false);
     const {response} = useSiteWideContext();
     const { data: session, status } = useSession();
     const router = useRouter();
@@ -45,13 +35,23 @@ const ServerDetailsForm = () => {
                 method: "GET"
             }).then((res) => {
             if (res.status === 200) {
-                router.push("/location-onboarding", undefined, { shallow: true });
+                 if(!calledPush){
+                        
+                    res.json().then((data) => {
+                        console.log(data , "data");
+                     const hospitalName = data.serverConfig[0].hospitalName;
+                     setCalledPush(true);
+                        router.push(`/location-onboarding/${hospitalName}`);   
+                
+                    });
+                 }
+
             }
             }).catch((err) => {
                 console.log(err);
             });
           
-    }, []);
+    }, [calledPush]);
     React.useEffect(() => {
         if(!session){
             router.push("/", undefined, { shallow: true });

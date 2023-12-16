@@ -22,7 +22,7 @@ export default async function handler(
                 res.status(200).json({location: location})
             }
             else {
-                res.status(301).redirect('/admin/createparentlocation')
+                res.status(400).json({error: 'Could not find location'})
             }
      }
      res.status(301).redirect('/server-onboarding')

@@ -10,7 +10,8 @@ export default async function handler(
 try {
    const serverConfig  = await prisma.serverConfig.findMany()
    if (serverConfig[0]?.basePath && serverConfig[0]?.hospitalName)
-     {
+     { 
+      console.log(serverConfig)
         res.status(200).json({serverConfig: serverConfig})
 
      }

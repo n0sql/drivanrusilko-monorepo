@@ -17,21 +17,28 @@ export default async function handler(
         {
           
             const newLocation = await locationManager.createParentLocation(myheaders, location, location.name, serverConfig.basePath);
+            console.log(newLocation)
             if (newLocation) {
                 await prisma.serverConfig.update({where: {hospitalName: location.name}, data: {
                     locationUuid: newLocation.uuid,
                     locationTag: newLocation.tags[0].uuid,
                     childLocations: {
-                        create: newLocation.childLocations.map((childLocation: any) => {
-                            return {
+                        createMany:{
+                            data: newLocation.childLocations.map((childLocation: any)=>({
                                 name: childLocation.display,
                                 uuid: childLocation.uuid,
-                                parentLocationName: newLocation.name,
-                            }
-                        })
+                                serverConfig: {
+                                    connect: {
+                                        parentLocationName: location.name
+                                    }
+                                }
+                            }))
+                  }
                     }
                 
-                }})
+                }}).catch((err)=>console.log(err)).finally(async ()=>{
+                    await prisma.$disconnect()
+                })
                 res.status(200).json({location: newLocation})
             } 
             else {
