@@ -1,11 +1,30 @@
 import React from "react"
 import HomePage from "../components/homepage/home-page"
-import { useSession } from "next-auth/react"
-import { useRouter } from "next/router"
-export default function MyPage(){
+import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 
+import getServerSession from "../lib/getServerSession"
+export default function MyPage() {
+         
     return(
-  <HomePage/>
-    
+  <div>
+    <HomePage/>
+    </div>
    )
+}
+
+export const  getServerSideProps: GetServerSideProps = async (context:GetServerSidePropsContext) => {
+ 
+  const session = await getServerSession(context.req, context.res);
+  if (!session) {
+    return {
+       props:{}
+    };
+  }
+
+  return {
+    redirect: {
+      destination: "/server-config",
+      permanent: false,
+    }
+  }
 }

@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import AuthForm from "../AuthForms/AuthForm";
+import { useSiteWideContext } from "../../context";
 // const menus = ["About Us", "How it Works", "Our Medical Experts", "Reviews"];
 function Gradient({
   conic,
@@ -24,12 +24,14 @@ function Gradient({
 
 
 export default function HomePage():JSX.Element{
-
+    const {response} = useSiteWideContext()
     return(
         <div className="mt-24 relative">
       <div className="relative flex place-items-center">
           <div className=" flex items-center justify-center w-full">
-          <AuthForm/>
+          {
+              response ?  <p>{response}</p> : <AuthForm/>
+          }
             <div className="absolute flex items-center justify-center w-64 h-64">
               <Gradient
                 className="opacity-90 w-[120px] h-[120px]"
@@ -42,10 +44,7 @@ export default function HomePage():JSX.Element{
             className="top-[-500px] opacity-[0.15] w-full h-full"
             conic
           />
-    
         </div>
-
-
     </div>
     )
 }

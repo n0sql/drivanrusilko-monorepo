@@ -1,7 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { Input, MyGrid } from "ui";
-import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 
 interface Location {
     name: string,
@@ -16,7 +15,7 @@ interface Location {
     countyDistrict: string,
 }
 
-const LocationOnboarding = () => {
+const CreateLocation = () => {
     const router = useRouter();
     const locationname = router.query.hospitalName;
     console.log(locationname);
@@ -40,8 +39,6 @@ const LocationOnboarding = () => {
         }));
       }
 
-
-    
     const handleSubmit = (e:any) => {
         e.preventDefault();
         location.name = locationname as string;
@@ -50,13 +47,12 @@ const LocationOnboarding = () => {
             body: JSON.stringify(location),
         }).then((res) => {
             if (res.status === 200) {
-                router.push("/provider-onboarding", undefined, { shallow: true });
+                router.push("/provider", undefined, { shallow: true });
             }
         }).catch((err) => {
             console.log(err);
         });
-    }  
-
+    }
     return(
         <div className="mt-24 relative flex flex-col text-gray-700 bg-transparent shadow-none rounded-xl bg-clip-border">
             <h1 className="block dark:text-gray-100 text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"  >Location Onboarding</h1>
@@ -146,4 +142,4 @@ const LocationOnboarding = () => {
 
 
 
-export default LocationOnboarding;
+export default CreateLocation;

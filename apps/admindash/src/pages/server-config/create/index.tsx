@@ -1,27 +1,23 @@
 import { Input } from "ui";
 import React from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useSiteWideContext } from "../../context";
-
+import { useSiteWideContext } from "../../../context";
+import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import getServerSession from "../../../lib/getServerSession"
 
  interface ServerDetails {
     basePath: string;
     hospitalName: string;
     email: string;
-    providerName: string; 
+    providerName: string;
 }
 
-const ServerDetailsForm = () => {
-    const [calledPush, setCalledPush] = React.useState(false);
+const ServerDetailsForm = ({email, providerName}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const {response} = useSiteWideContext();
-    const { data: session, status } = useSession();
-    const router = useRouter();
     const [serverDetails, setServerDetails] = React.useState<ServerDetails>({
         basePath: "",
         hospitalName: "",
-        email: "",
-        providerName: "",
+        email:  email ? email : "",
+        providerName: providerName ? providerName : "",
     })
     const handleAllChange = (e:any) => {
         const { name, value } = e.target;
@@ -30,40 +26,8 @@ const ServerDetailsForm = () => {
             [name]: name === "basePath" ? value.replace(/\/$/, "") : value,
         }));
       }
-    React.useEffect(() => {
-            fetch("/api/servermanager/get", {
-                method: "GET"
-            }).then((res) => {
-            if (res.status === 200) {
-                 if(!calledPush){
-                        
-                    res.json().then((data) => {
-                        console.log(data , "data");
-                     const hospitalName = data.serverConfig[0].hospitalName;
-                     setCalledPush(true);
-                        router.push(`/location-onboarding/${hospitalName}`);   
-                
-                    });
-                 }
 
-            }
-            }).catch((err) => {
-                console.log(err);
-            });
-          
-    }, [calledPush]);
-    React.useEffect(() => {
-        if(!session){
-            router.push("/", undefined, { shallow: true });
-        }
-        else{
-             setServerDetails((prev) => ({
-                ...prev,
-                email: session.user.email as string,
-                providerName: session.user.name as string,
-              }));
-        }
-    }, [session]);
+
 
     const handleSubmit = async (e:any) => {
         e.preventDefault();
@@ -78,8 +42,8 @@ const ServerDetailsForm = () => {
       const data = {
         basePath: serverDetails.basePath,
         hospitalName: serverDetails.hospitalName,
-       email: serverDetails.email ? serverDetails.email : session?.user.email as string,
-        providerName: serverDetails.providerName ? serverDetails.providerName : session?.user.name as string,
+       email: serverDetails.email ? serverDetails.email : email,
+        providerName: serverDetails.providerName ? serverDetails.providerName : providerName,
       }
 
       const res = await fetch("/api/servermanager/create", {
@@ -87,10 +51,7 @@ const ServerDetailsForm = () => {
         body: JSON.stringify(data),
       });
 
-       if (res.status === 200){
-        router.push("/location-onboarding", undefined, { shallow: true });
-       }
-        else {
+       if (res.status !== 200){     
             alert("Something went wrong, please try again");
             setServerDetails({
                 basePath: "",
@@ -128,5 +89,25 @@ const ServerDetailsForm = () => {
     );
 
 }
+
+
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+    const session = await getServerSession(context.req, context.res);
+    if (!session) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false,
+            },
+        };
+    }
+    return {
+        props: {
+            email: session.user.email,
+            providerName: session.user.name,
+        },
+    };
+
+};
 
 export default ServerDetailsForm;

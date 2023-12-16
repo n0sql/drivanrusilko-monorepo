@@ -1,44 +1,33 @@
 import {  Sofia_Sans } from "next/font/google";
 import { useSession, signOut } from "next-auth/react";
-const loggedInMenu = ["Subscriptions", "Orders", "Appointments", "Profile", "Labs"];
+import React from "react";
+import { Collapse } from "@material-tailwind/react";
+const loggedInMenu = ["Server", "Hospital", "Profile"];
 const sofi = Sofia_Sans({subsets: ["latin"]})
 
 function Header ():JSX.Element {
-
+  const [openNav, setOpenNav] = React.useState(false);
+  React.useEffect(() => {
+    window.addEventListener(
+      "resize",
+      () => window.innerWidth >= 960 && setOpenNav(false),
+    );
+  }, []);
     const {data:session} = useSession();
       return(  
         
-        <div className={` w-full fixed top-0 left-0 z-[100]`}>
+        
       <nav
-          className={`${sofi.className} relative flex-wrap flex w-full items-center justify-center lg:justify-between bg-neutral-50 py-2 text-neutral-600 shadow-lg dark:bg-neutral-700 dark:text-neutral-300 dark:shadow-black/5 lg:justify-between`}
+          className={`${sofi.className} sticky top-0 z-10 block w-full max-w-full px-4 py-2 bg-neutral-50  text-neutral-600 shadow-lg dark:bg-neutral-700 dark:text-neutral-300 dark:shadow-black/5 rounded-none shadow-md h-max bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-2 `}
           id="navbarSupportedContentX"
           data-te-navbar-ref
-        >
-          {
-            session && (
-              <div className="flex items-center justify-center gap-2">
-                {loggedInMenu.map((item:string, i:number) => (
-                  <a
-                    key={i}
-                    href={`/${item.toLowerCase()}`}
-                    className="hover:bg-gray-100 dark:hover:bg-gray-950 text-gray-700 dark:text-gray-100 text-sm font-bold py-1 px-4 rounded-full"
-                  >
-                    {item}
-                  </a>
-                ))}
-                <button
-                  className="hover:bg-gray-100 dark:hover:bg-gray-950 text-gray-700 dark:text-gray-100 text-sm font-bold py-1 px-4 rounded-full"
-                  onClick={() => signOut()}></button>
-              </div>
-            ) 
-
-          }
-          <div data-te-nav-item-ref>
+        ><div className="flex items-center justify-between text-blue-gray-900">
+           <div data-te-nav-item-ref>
             <a
               data-te-ripple-init
               data-te-ripple-color="light"
               href="https://drivan.d3gmqotpidrz95.amplifyapp.com/"
-              className=" items-center justify-between mr-4 lock py-2 px-4 flex text-primary font-bold text-xl order-first cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700"
+              className=" items-center  mr-4 lock py-2 px-4 flex text-primary font-bold text-xl  cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700"
             >
               <img src="/drivanlogo.svg" className="mr-3 h-8" alt="logo" />
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
@@ -46,9 +35,75 @@ function Header ():JSX.Element {
               </span>
             </a>
           </div>
+          <div className="flex items-center gap-4">
+          {
+            session && (
+              <div className="hidden mr-4 lg:block">
+              <div className="flex flex-col gap-2 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+                {loggedInMenu.map((item:string, i:number) => (
+                  <a
+                    key={i}
+                    href={item === "Server" ? "/server-config" : `/${item.toLowerCase()}`}
+                    className="hover:bg-gray-100 dark:hover:bg-gray-950 text-gray-700 dark:text-gray-100 text-sm font-bold py-1 px-4 rounded-full"
+                  >
+                    {item}
+                  </a>
+                ))}
+         
+              </div>
+              </div>
+            ) 
 
+          }
+               <div className="flex items-center gap-x-1">
+            <button
+              onClick={() => signOut()}
+              className="hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+              type="button">
+              <span>Log Out</span>
+            </button>
+          </div>
+          <button
+            onClick={() => setOpenNav(!openNav)}
+            className="relative ml-auto h-6 max-h-[40px] w-6 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-inherit transition-all hover:bg-transparent focus:bg-transparent active:bg-transparent disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:hidden"
+            >
+            <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" stroke="currentColor"
+                strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </span>
+          </button>
+          </div>
+</div>
+<Collapse open={openNav}>
+            
+              <div className="container mx-auto">
+              <div className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+                {loggedInMenu.map((item:string, i:number) => (
+                  <a
+                    key={i}
+                    href={item === "Server" ? "/server-config" : `/${item.toLowerCase()}`}
+                    className="hover:bg-gray-100 dark:hover:bg-gray-950 text-gray-700 dark:text-gray-100 text-sm font-bold py-1 px-4 rounded-full"
+                  >
+                    {item}
+                  </a>
+                ))}
+         
+              </div>
+              <button
+              onClick={() => signOut()}
+              className="hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+              type="button">
+              <span>Log Out</span>
+            </button>
+              </div>
+            
+
+          
+</Collapse>
         </nav>
-        </div>  
+       
   )
   }
 

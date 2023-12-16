@@ -1,5 +1,4 @@
 import { PrismaClient } from 'database'
-
 import type { NextApiRequest, NextApiResponse } from "next";
 const prisma = new PrismaClient();
 export default async function handler(
@@ -28,7 +27,7 @@ export default async function handler(
          hospitalName: serverData.hospitalName,
          providerName: serverData.providerName,
          basePath: serverData.basePath,
-         user: {
+         createdBy: {
              connect: {
                  id: user?.id as string
              }

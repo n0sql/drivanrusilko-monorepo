@@ -107,9 +107,15 @@ interface SiteWideContextType {
       });
       if (result?.error) {
         setResponse(result.error);
-      } else {
-        window.location.href = "/server-onboarding";
-      }}
+        setTimeout(() => {
+          setResponse(null);
+        }, 5000);
+       }
+        else {
+        window.location.href =  `${window.location.origin}/server-config`;
+  }
+    };
+      
       const noEmailSent =()=>{
         setEmailSent(false);
       }

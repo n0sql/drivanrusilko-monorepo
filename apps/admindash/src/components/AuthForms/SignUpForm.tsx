@@ -8,11 +8,7 @@ const SignUpForm = () => {
     } = useSiteWideContext()
   return (
     <div className=" mx-auto">
-      {response !== null ? (
-        <div className="text-center text-primary font-bold mb-5">
-          {response}
-        </div>
-      ) : (
+
         <form onSubmit={handleSignUpSubmit} className="form flex flex-col justify-between gap-y-4">
           <h4 className="text-left  text-primary font-bold">Welcome</h4>
           <div className="relative text-center ">
@@ -33,7 +29,7 @@ const SignUpForm = () => {
             />
           </div>
         </form>
-      )}
+     
 
       <div className="mb-3 text-center text-[#6f50cb] dark:text-gray-100">
         <p className="text-primary text-sm">

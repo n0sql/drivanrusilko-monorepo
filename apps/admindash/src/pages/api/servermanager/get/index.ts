@@ -1,24 +1,22 @@
 import { PrismaClient } from 'database'
 import type { NextApiRequest, NextApiResponse } from "next";
 const prisma = new PrismaClient();
-export default async function handler(
+export default async function handler( 
     req: NextApiRequest,
     res: NextApiResponse
   ) {
 
 
 try {
-   const serverConfig  = await prisma.serverConfig.findMany()
-   if (serverConfig[0]?.basePath && serverConfig[0]?.hospitalName)
-     { 
-      console.log(serverConfig)
-        res.status(200).json({serverConfig: serverConfig})
+   const serverConfig  = await prisma.serverConfig.findMany();
+   if (serverConfig && serverConfig?.length > 0){
 
-     }
-       else {
-          res.status(400).json({error: 'No server config found'})
-       }
+         res.status(200).json({serverConfig: serverConfig})
+      }
+   else {
+      res.status(400).json({error: 'No server config found'})
+   }
 } catch (error) {
    res.status(400).json({error: 'No server config found'})
 }
-  }
+}

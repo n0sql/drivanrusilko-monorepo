@@ -50,7 +50,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   role          Role    @default(USER)
-  serverConfig  ServerConfig[]
+  serverConfigs  ServerConfig[]  @relation("serverConfigs")
+  createdServerConfigs ServerConfig[] @relation("createdBy")
 }
 
 model VerificationToken {
@@ -63,6 +64,7 @@ model VerificationToken {
 enum Role {
   USER
   ADMIN
+  STAFF
 }
 
 model ServerConfig {
@@ -77,7 +79,8 @@ model ServerConfig {
  childLocations ChildLocation[]
  username String @default("admin")
  password String @default("Admin123")
- user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ createdBy User @relation("createdBy", fields: [userId], references: [id])
+ users User[] @relation("serverConfigs")
 }
 
 model ChildLocation {

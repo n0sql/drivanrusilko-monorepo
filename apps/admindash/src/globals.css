@@ -27,3 +27,6 @@ body {
 }
 
 
+ol{
+  list-style-type: number;
+}

@@ -33,7 +33,7 @@ export default async function handler(
           }
 
      }
-     res.status(301).redirect('/server-onboarding')
+     res.status(400).json({error: 'Could not create provider'})
   }
 
   }

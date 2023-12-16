@@ -1,24 +1,9 @@
 import { Input } from "ui";
 import { useSiteWideContext } from "../../context";
 import React from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-const LoginForm = () => {
- const { handleLogin, toggleAuthView,handleEmailChange, handlePassWordChange } = useSiteWideContext()
+const LoginForm =  () => {
+ const { handleLogin, toggleAuthView,handleEmailChange, handlePassWordChange} = useSiteWideContext()
 
- const {data: session, status} = useSession();
- const router = useRouter();
- const [calledPush, setCalledPush] = React.useState(false);
- React.useEffect(() => {
-  
-   if (session) {
-      if(!calledPush){
-        setCalledPush(true);
-        router.push("/server-onboarding", undefined, { shallow: true });
-
-      }
- }}
- , [session])
   return (
     <div className="mx-auto">
       <h4 className="text-left  text-primary font-bold mb-2">Welcome Back</h4>
@@ -59,5 +44,7 @@ const LoginForm = () => {
     </div>
   );
 };
+
+
 
 export  default LoginForm

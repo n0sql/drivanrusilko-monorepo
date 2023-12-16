@@ -12,7 +12,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 
 const prisma = new PrismaClient();
 
-export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
+export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) { 
   const isCredentialsCallback =
     req.query?.nextauth?.includes("callback") &&
     req.query.nextauth?.includes("credentials") &&
@@ -50,19 +50,17 @@ export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
               if (!user) {
                 throw new Error("User account does not exist");
               }
-
+              
               const passwordsMatch = await bcrypt.compare(
                 password,
                 user?.password
               );
-
               if (!passwordsMatch) {
                 throw new Error("Password is not correct");
               }
               if (user?.role !== "ADMIN") {
                 throw new Error("You are not an admin");
               }
-              console.log(user);
               return {
                 id: user.id,
                 email: user.email,

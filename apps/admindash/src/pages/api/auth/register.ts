@@ -41,8 +41,6 @@ export default async function handler(
           password: passwordHash,
           role: "ADMIN",
         },
-        
-         
       });
 
       await tx.account.create({
