@@ -2,7 +2,7 @@
 import { ArrowUpIcon } from "@heroicons/react/24/outline";
 const DashBoardView = () => {
   return (
-    <main className="p-4  h-auto pt-20"> 
+    <main className="p-4  h-auto"> 
       <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
       <div className="border rounded rounded-lg  dark:border-gray-600 mb-4">
         <section className="bg-white dark:bg-gray-900 rounded rounded-lg shadow">

@@ -1,5 +1,5 @@
 
-import base64 from 'js-base64';
+import { encode, decode } from 'js-base64';
 
 export async function initializeSession({
     username,
@@ -12,7 +12,7 @@ export async function initializeSession({
 }): Promise<Headers | undefined | null> {
     
     const myHeaders = new Headers();
-    const token = base64.encode(username && password ? username + ":" + password : "admin:Admin123");
+    const token = encode(username && password ? username + ":" + password : "admin:Admin123");
     myHeaders.append("Authorization", "Basic " + token);
     myHeaders.append("Content-Type", "application/json");
 
@@ -45,7 +45,7 @@ export async function endSession(myHeaders: Headers, baseUrl: string){
     };
 
     try {
-        const logoutResult =  await fetch(`${baseUrl}/ws/rest/v1/session`, requestOptions);
+    const logoutResult =  await fetch(`${baseUrl}/ws/rest/v1/session`, requestOptions);
     const logout = await logoutResult.json();
     return logout;
     } catch (error) {

@@ -28,7 +28,7 @@ export async function checkParentLocation (myHeaders: Headers,  locationName:str
     };
 
    try {
-    const locationResponse = await fetch(`${baseUrl}/ws/rest/v1/location?q=${locationName}&v=default`, requestOptions)
+    const locationResponse = await fetch(`${baseUrl}/ws/rest/v1/location?q=${locationName}&v=full`, requestOptions)
     const locationResult = await locationResponse.json();
     if (locationResult.results.length > 0) {
         return locationResult.results[0]
@@ -58,7 +58,6 @@ export async function createParentLocation (myHeaders: Headers, location:Locatio
         method: 'POST',
         headers: myHeaders,
         body: raw,
-        redirect: 'follow' as RequestRedirect
     };
 
    try {

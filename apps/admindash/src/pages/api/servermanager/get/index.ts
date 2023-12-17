@@ -8,7 +8,11 @@ export default async function handler(
 
 
 try {
-   const serverConfig  = await prisma.serverConfig.findMany();
+   const serverConfig  = await prisma.serverConfig.findMany({
+      include:{
+         childLocations: true
+      }
+   });
    if (serverConfig && serverConfig?.length > 0){
 
          res.status(200).json({serverConfig: serverConfig})

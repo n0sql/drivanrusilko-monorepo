@@ -16,10 +16,24 @@ export default async function handler(
 
      try {
 
+        await prisma.user.update({
+            where: {id: id},
+            data: {
+                serverConfigs: {
+                    connect: {
+                        hospitalName: serverConfig.hospitalName
+                    }
+                }
+            }
+        })
       const updatedServerConfig = await prisma.serverConfig.update(
             {
-                where: {id: id},
-            data: {...serverConfig 
+                where: {hospitalName: serverConfig.hospitalName},
+            data: { users : {
+                connect: {
+                    id: id
+                }
+            }
         }}
       );
 

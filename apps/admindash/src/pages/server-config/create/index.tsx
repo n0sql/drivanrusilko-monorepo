@@ -3,6 +3,7 @@ import React from "react";
 import { useSiteWideContext } from "../../../context";
 import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import getServerSession from "../../../lib/getServerSession"
+import {useRouter} from "next/router";
 
  interface ServerDetails {
     basePath: string;
@@ -12,6 +13,7 @@ import getServerSession from "../../../lib/getServerSession"
 }
 
 const ServerDetailsForm = ({email, providerName}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    const router = useRouter();
     const {response} = useSiteWideContext();
     const [serverDetails, setServerDetails] = React.useState<ServerDetails>({
         basePath: "",
@@ -60,6 +62,7 @@ const ServerDetailsForm = ({email, providerName}: InferGetServerSidePropsType<ty
                 providerName: "",
             });
         }
+        router.push(`/server-config`, undefined, { shallow: true });
     }
 
 

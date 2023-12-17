@@ -17,8 +17,7 @@ interface Location {
 
 const CreateLocation = () => {
     const router = useRouter();
-    const locationname = router.query.hospitalName;
-    console.log(locationname);
+    const locationname = router.query.name;
     const [location, setLocation] = React.useState<Location>({
         name:   locationname ? locationname.toString() : "",
         address1: "",
@@ -38,6 +37,7 @@ const CreateLocation = () => {
             [name]:  value,
         }));
       }
+       
 
     const handleSubmit = (e:any) => {
         e.preventDefault();
@@ -47,7 +47,7 @@ const CreateLocation = () => {
             body: JSON.stringify(location),
         }).then((res) => {
             if (res.status === 200) {
-                router.push("/provider", undefined, { shallow: true });
+                router.push("/server-config", undefined, { shallow: true });
             }
         }).catch((err) => {
             console.log(err);

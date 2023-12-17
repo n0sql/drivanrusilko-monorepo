@@ -8,14 +8,12 @@ export async function createPerson( person: Person, myHeaders: Headers, baseUrl:
     }
  else{
     var raw = JSON.stringify(person);
-
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
-      body: raw,
-      redirect: 'follow' as RequestRedirect
+      body: raw
     };
-  
+
     const response = await fetch(`${baseUrl}/ws/v1/person`, requestOptions)
     const result = await response.json();
     return result
@@ -79,7 +77,6 @@ export async function  searchUserByName(name: string, myHeaders: Headers,baseUrl
     var requestOptions = {
         method: 'GET',
         headers: myHeaders,
-        redirect: 'follow' as RequestRedirect
     };
     
     try {
