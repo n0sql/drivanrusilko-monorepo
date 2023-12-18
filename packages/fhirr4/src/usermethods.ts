@@ -1,23 +1,56 @@
 
-export async function createPerson( person: Person, myHeaders: Headers, baseUrl: string) {
-  
-//  first we have to check if the person exists
-    const personExists = await searchPersonByName(person.names[0].givenName, myHeaders, baseUrl);
-    if (personExists.results.length > 0) {
+export async function createPerson( person: any, myHeaders: Headers, baseUrl: string) {
+ const personExists = await searchPersonByName(person.names[0].givenName, myHeaders, baseUrl);
+    if (personExists) {
         return personExists.results[0];
     }
- else{
-    var raw = JSON.stringify(person);
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw
-    };
+try {
 
-    const response = await fetch(`${baseUrl}/ws/v1/person`, requestOptions)
-    const result = await response.json();
-    return result
- }
+    const raw = JSON.stringify({
+        "names": [
+        {
+          "givenName": person.names[0].givenName,
+          "middleName": person.names[0].middleName,
+          "familyName": person.names[0].familyName,
+          "preferred": true,
+          "prefix": person.names[0].prefix
+        }
+      ],
+      "gender": person.gender,
+      "age": Number(person.age),
+      "birthdate":  person.birthDate,
+      "birthdateEstimated": false,
+      "dead": false,
+      "addresses": [
+        {
+          "preferred": true,
+          "address1":  person.addresses[0].address1,
+          "cityVillage": person.addresses[0].cityVillage,
+          "stateProvince": person.addresses[0].stateProvince,
+          "country": "USA",
+          "postalCode": person.addresses[0].postalCode,
+          "countyDistrict": person.addresses[0].countyDistrict
+        }
+      ],
+      "deathdateEstimated": false
+    })
+
+    
+    const requestOptions = {
+       method: 'POST',
+       headers: myHeaders,
+       body:  raw,
+       redirect: 'follow' as RequestRedirect
+     };
+     const response = await fetch(`${baseUrl}/ws/rest/v1/person`, requestOptions)
+     const result = await response.json();
+     console.log(result)
+     return result
+    
+} catch (error) {
+     console.log(error);
+     return null;
+}
 }
 
 
@@ -46,9 +79,6 @@ export interface Person {
     birthDateEstimated: boolean,
     birthTime: string,
     dead: boolean,
-    deathDate: string,
-    causeOfDeath: string,
-    deathdateEstimated: boolean,
     addresses: Address[],
     attributes: any[]
 }
@@ -59,11 +89,10 @@ export async function searchPersonByName(name: string, myHeaders: Headers, baseU
   var requestOptions = {
     method: 'GET',
     headers: myHeaders,
-    redirect: 'follow' as RequestRedirect
 };
 
 try {
-    const response = await fetch(`${baseUrl}/ws/rest/v1/person?q=${name}`, requestOptions)
+    const response = await fetch(`${baseUrl}/ws/rest/v1/person?q=${name}&v=full`, requestOptions)
   const result = await response.json();
   return result
   } catch (error) {
@@ -77,10 +106,29 @@ export async function  searchUserByName(name: string, myHeaders: Headers,baseUrl
     var requestOptions = {
         method: 'GET',
         headers: myHeaders,
+
     };
     
     try {
-        const response = await fetch(`${baseUrl}/ws/rest/v1/user?q=${name}`, requestOptions)
+        const response = await fetch(`${baseUrl}/ws/rest/v1/user?q=${name}&v=full`, requestOptions)
+        const result = await response.json();
+        console.log(result, "result")
+        return result
+    } catch (error) {
+        console.log(error)
+        return null;
+    }
+}
+
+export async function searchUserByUuid (uuid: string, myHeaders: Headers,baseUrl: string) {
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+    };
+    
+    try {
+        const response = await fetch(`${baseUrl}/ws/rest/v1/user/${uuid}`, requestOptions)
         const result = await response.json();
         return result
     } catch (error) {
@@ -101,21 +149,20 @@ export async function  searchUserByName(name: string, myHeaders: Headers,baseUrl
 // userProperties	JSON Object	A set of key value pairs. Used to store user specific data
 
     export interface User {
-        name: string,
-        description: string,
-        username: string,
+    username: string,
         password: string,
         person: Person,
         roles: any[],
     }
 
-export async function createUserFromPerson(person:Person, userdata: Omit<User, "person" >, myHeaders: Headers, baseUrl: string) {
-    const userExists = await searchUserByName(userdata.username, myHeaders, baseUrl);
-    if (userExists.results.length > 0) {
-        return userExists.results[0];
-    }
-    const user = {...userdata, person:person}
-    var raw = JSON.stringify(user);
+export async function createUserFromPerson(userdata: any, myHeaders: Headers, baseUrl: string) {
+    console.log(userdata.password, "userdata.password")
+    const raw = JSON.stringify({
+        "username": userdata.username,
+        "password": userdata.password,
+        "person": userdata.person,
+        "roles": userdata.roles
+    });
     
     var requestOptions = {
         method: 'POST',
@@ -125,8 +172,9 @@ export async function createUserFromPerson(person:Person, userdata: Omit<User, "
     };
     
    try {
-    const response = await fetch("/ws/rest/v1/user", requestOptions)
+    const response = await fetch(`${baseUrl}/ws/rest/v1/user`, requestOptions)
     const result = await response.json();
+    console.log(result)
     return result
    } catch (error) {
          console.log(error)

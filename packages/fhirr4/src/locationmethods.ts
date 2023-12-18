@@ -70,6 +70,24 @@ export async function createParentLocation (myHeaders: Headers, location:Locatio
    }
 }
 
+export async function getLocationByUuid (myHeaders: Headers, locationUuid:string, baseUrl: string) {
+
+    const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow' as RequestRedirect
+    };
+
+   try {
+    const locationResponse = await fetch(`${baseUrl}/ws/rest/v1/location/${locationUuid}`, requestOptions)
+    const locationResult = await locationResponse.json();
+    return locationResult;
+   } catch (error) {
+            console.log(error);
+            return null;
+   }
+}
+
 export interface Location {
     name: string,
     address1: string,

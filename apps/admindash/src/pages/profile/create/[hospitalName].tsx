@@ -1,12 +1,13 @@
 import React from 'react';
 import { Input, MyGrid } from 'ui';
-
+import { useRouter } from 'next/router';
 
 
 export interface Address {
     preferred: boolean;
     address1: string;
     cityVillage: string;
+    stateProvince: string;
     country: string;
     postalCode: string;
 }
@@ -27,13 +28,12 @@ export interface Person {
     birthDateEstimated: boolean;
     birthTime: string;
     dead: boolean;
-    deathDate: string;
-    causeOfDeath: "";
-    deathdateEstimated: boolean;
     addresses: Address[];
 }
 
 export default function CreatePerson () {
+    const router = useRouter();
+    const  hospitalName  = router.query.hospitalName;
     const [person, setPerson] = React.useState<Person>({
         names: [
             {
@@ -50,14 +50,12 @@ export default function CreatePerson () {
         birthDateEstimated: false,
         birthTime: "",
         dead: false,
-        deathDate: "",
-        causeOfDeath: "",
-        deathdateEstimated: false,
         addresses: [
             {
                 preferred: true,
                 address1: "",
                 cityVillage: "",
+                stateProvince: "",
                 country: "",
                 postalCode: ""
             }
@@ -98,10 +96,25 @@ export default function CreatePerson () {
         }));
     }
 
-    const handleSubmit = (e:any) => {
+    const handleSubmit = async (e:any) => {
         e.preventDefault();
+        const data = {
+            locationName: hospitalName,
+            person: person,
+        }
+       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/accountmanager/create`, {
+            method: "POST",
+            body: JSON.stringify(data),
+        });
+        if (response.status === 200) {
+            router.push(`/profile/${hospitalName as string}`);
+        } 
+         else {
+            const error = await response.json();
+            alert(error.error);
+         }
         // Handle form submission here
-    }
+}
 
     return(
         <div className="mt-10 relative flex flex-col text-gray-700 bg-transparent shadow-none rounded-xl bg-clip-border">
@@ -172,6 +185,20 @@ export default function CreatePerson () {
                             />
                             </MyGrid>
                             <MyGrid columns={2}>
+                            <Input
+    label="Postal Code"
+    value="postalCode"
+    type="text"
+    changeHandler={handleAddressChanges}
+        />
+        <Input
+    label="Gender"
+    value="gender"
+    type="text"
+    changeHandler={handleAllChange}
+        />
+                                </MyGrid>
+                            <MyGrid columns={2}>
 <Input
     label="Street"
     value="street"
@@ -195,17 +222,12 @@ export default function CreatePerson () {
 
 <Input
     label="State"
-    value="state"
+    value="stateProvince"
     type="text"
     changeHandler={handleAddressChanges}
 />
 </MyGrid>
-<Input
-    label="Postal Code"
-    value="postalCode"
-    type="text"
-    changeHandler={handleAddressChanges}
-        />
+
                             
 
 

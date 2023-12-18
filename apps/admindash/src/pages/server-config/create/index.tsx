@@ -62,7 +62,7 @@ const ServerDetailsForm = ({email, providerName}: InferGetServerSidePropsType<ty
                 providerName: "",
             });
         }
-        router.push(`/server-config`, undefined, { shallow: true });
+        router.push("/server-config");
     }
 
 

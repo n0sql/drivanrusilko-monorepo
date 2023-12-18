@@ -1,12 +1,10 @@
 import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import Link from "next/link";
 import getServerSession from "../../lib/getServerSession"
-import { PrismaClient } from "database";
 import { DashBoardView } from "ui";
 
 
-export default function LocationDashboard ({hospitalConfig}: InferGetServerSidePropsType<typeof getServerSideProps>){
-    if (hospitalConfig)
+export default function LocationDashboard ({userProfile, userLocation}: InferGetServerSidePropsType<typeof getServerSideProps>){
+    if (userProfile && userLocation)
      return(
      <div className="overflow-hidden w-[80vw]">
 <DashBoardView />
@@ -15,10 +13,10 @@ export default function LocationDashboard ({hospitalConfig}: InferGetServerSideP
  }
 
 export const getServerSideProps: GetServerSideProps = async (context:GetServerSidePropsContext) => {
-
     const hospitalName = context.query.name as string;
     const session = await getServerSession(context.req, context.res);
-    if (!session) {
+   
+    if (!(session)) { 
       return {
         redirect: {
           destination: "/",
@@ -26,49 +24,51 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
         },
       };
     }
+    console.log(session, "session from dashboard");
+    const userLocationResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locationmanager/get/${hospitalName}`, {method: "GET"});
+    if (userLocationResponse.status !== 200) {
+      return {
+        redirect: {
+          destination: `/server-config/location/create/${hospitalName}`,
+          permanent: false,
+        },
+      };
+    }
+    const  userLocation = await userLocationResponse.json();
+    if (!(userLocation)) {
+      return {
+        redirect: {
+          destination: `/server-config/location/create/${hospitalName}`,
+          permanent: false,
+        },
+      };
+    }
+    const userProfileResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/accountmanager/get/${hospitalName}`, {method: "POST", body: JSON.stringify({email: session.user.email})});
 
-    const allhospitalConfigResponse  = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/servermanager/get`, {method: "GET"});
-    if (allhospitalConfigResponse.status !== 200) {
+    if (userProfileResponse.status !== 200) {
       return {
         redirect: {
-          destination: "/server-config/create",
+          destination: `/profile/create/${hospitalName}`,
           permanent: false,
         },
       };
     }
-    const allhospitalConfig = await allhospitalConfigResponse.json();
-    if (allhospitalConfig.serverConfig.length === 0) {
+    const userProfile = await userProfileResponse.json();
+    if (!(userProfile)) {
       return {
         redirect: {
-          destination: "/server-config/create",
+          destination: `/profile/create/${hospitalName}`,
           permanent: false,
         },
       };
     }
-      const hospitalConfig = allhospitalConfig.serverConfig.find((config:any) => config.hospitalName === hospitalName);
-        if (!hospitalConfig) {
-            return {
-            redirect: {
-                destination: `/server-config/location/create/${hospitalName}`, //`/server-config/create?hospitalName=${hospitalName}
-                permanent: false,
-            },
-            };
-        }
-        if((!hospitalConfig.locationUuid)  || (!hospitalConfig.locationTag))
-        {
-            return {
-                redirect: {
-                    destination: `/server-config/location/create/${hospitalName}`, //`/server-config/create?hospitalName=${hospitalName}
-                    permanent: false,
-                },
-                };
-        }
+    
+   
+
         return {
             props: {
-                hospitalConfig: hospitalConfig,
+                userProfile: userProfile,
+                userLocation: userLocation,
             },
         };
-        
 }
-    
-    

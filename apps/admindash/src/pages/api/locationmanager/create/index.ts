@@ -1,11 +1,11 @@
-import { PrismaClient } from 'database'
 import type { NextApiRequest, NextApiResponse } from "next";
 import { openmrsSessionManager,  locationManager} from 'fhirr4';
-const prisma = new PrismaClient();
+import prisma from "../../../../lib/db";
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
   ) {
+    
     const location = JSON.parse(req.body)
     console.log(location)
      const serverConfig  = await prisma.serverConfig.findUnique({where: {hospitalName: location.name}})
@@ -31,12 +31,13 @@ export default async function handler(
                     }
                 
                 }}).catch((err)=>console.log(err)).finally(async ()=>{
-                    await prisma.$disconnect()
+                    await prisma.$disconnect();
                 })
-                res.status(200).json({location: newLocation})
+                res.status(200).json({location: newLocation});
+                
             } 
             else {
-                res.status(400).json({error: 'Could not create location'})
+                res.status(400).json({error: 'Could not create location'});
             }   
         }
 

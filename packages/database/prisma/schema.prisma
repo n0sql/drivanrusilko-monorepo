@@ -50,8 +50,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   role          Role    @default(USER)
-  serverConfigs  ServerConfig[]  @relation("serverConfigs")
   createdServerConfigs ServerConfig[] @relation("createdBy")
+  userserverConfigs  UserServerConfig[]
 }
 
 model VerificationToken {
@@ -80,7 +80,7 @@ model ServerConfig {
  username String @default("admin")
  password String @default("Admin123")
  createdBy User @relation("createdBy", fields: [userId], references: [id])
- users User[] @relation("serverConfigs")
+ userServerConfigs UserServerConfig[]
 }
 
 model ChildLocation {
@@ -90,3 +90,19 @@ model ChildLocation {
   parentLocationName String
   serverConfig ServerConfig @relation(fields: [parentLocationName], references: [hospitalName], onDelete: Cascade)
 }
+
+model UserServerConfig {
+  id             String      @id @default(cuid())
+  userId         String
+  serverConfigId String
+  username       String
+  userUUID       String
+  locationUUID   String
+  password       String
+  user           User    @relation(fields: [userId], references: [id])
+  serverConfig   ServerConfig @relation(fields: [serverConfigId], references: [id])
+  @@index([userId], name: "userId")
+  @@index([serverConfigId], name: "serverConfigId")
+  @@unique([userId, serverConfigId])
+}
+
