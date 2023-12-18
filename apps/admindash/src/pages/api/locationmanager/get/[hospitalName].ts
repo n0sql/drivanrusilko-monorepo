@@ -14,7 +14,6 @@ export default async function handler(
         if (myheaders)
         {
             const location = await locationManager.checkParentLocation(myheaders, hospitalName as string, serverConfig.basePath);
-    
             if (location) {
                 res.status(200).json({location: location});
                
@@ -23,8 +22,8 @@ export default async function handler(
                 res.status(400).json({error: 'Could not find location'});
             }
      }
-     res.status(400).json({error: 'Could not find location'})
+     res.status(400).json({error: 'Could not find location'});
   }  else {
-    res.status(400).json({error: 'Please create a location first'})
+    res.status(400).json({error: 'Please create a location first'});
   }
   }

@@ -1,9 +1,5 @@
 
 export async function createPerson( person: any, myHeaders: Headers, baseUrl: string) {
- const personExists = await searchPersonByName(person.names[0].givenName, myHeaders, baseUrl);
-    if (personExists) {
-        return personExists.results[0];
-    }
 try {
 
     const raw = JSON.stringify({
@@ -112,7 +108,6 @@ export async function  searchUserByName(name: string, myHeaders: Headers,baseUrl
     try {
         const response = await fetch(`${baseUrl}/ws/rest/v1/user?q=${name}&v=full`, requestOptions)
         const result = await response.json();
-        console.log(result, "result")
         return result
     } catch (error) {
         console.log(error)
@@ -138,15 +133,7 @@ export async function searchUserByUuid (uuid: string, myHeaders: Headers,baseUrl
 }
 
 
-// we need to create an interface for the user data
-// name	String	Name of the user
-// description	String	Description of the user
-// username	String	username of the user
-// password	String	password of the user
-// person	String	person resource associated with the user
-// systemId	String	a unique identifier assigned to each user
-// roles	Array[] : role	a list of roles attributed to the user
-// userProperties	JSON Object	A set of key value pairs. Used to store user specific data
+
 
     export interface User {
     username: string,
@@ -181,6 +168,3 @@ export async function createUserFromPerson(userdata: any, myHeaders: Headers, ba
          return null;
    }
 }
-
-
-

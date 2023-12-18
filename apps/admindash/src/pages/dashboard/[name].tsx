@@ -24,7 +24,6 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
         },
       };
     }
-    console.log(session, "session from dashboard");
     const userLocationResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locationmanager/get/${hospitalName}`, {method: "GET"});
     if (userLocationResponse.status !== 200) {
       return {
@@ -62,9 +61,6 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
         },
       };
     }
-    
-   
-
         return {
             props: {
                 userProfile: userProfile,

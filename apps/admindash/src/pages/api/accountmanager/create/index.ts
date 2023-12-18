@@ -1,4 +1,3 @@
-
 import type { NextApiRequest, NextApiResponse } from "next";
 import { openmrsSessionManager,  userManager} from 'fhirr4';
 import { generate } from 'generate-password';
@@ -24,7 +23,6 @@ export default async function handler(
         if (myheaders)
         {
           const newPerson = await userManager.createPerson(person, myheaders, serverConfig.basePath);
-          console.log(newPerson, "newPerson");
           if(newPerson)
           {
             const password = generate({ length: 10, numbers: true });
@@ -62,15 +60,11 @@ export default async function handler(
                     res.status(200).json({userServerConfig: userServerConfig});
                 }
             }
-
             res.status(400).json({error: 'Could not create user'})
            }
            res.status(400).json({error: 'Could not create user'})
           }
      }
-     
      res.status(400).json({error: 'Could not create user or provider'})
   }
-
-
-  }
+}
