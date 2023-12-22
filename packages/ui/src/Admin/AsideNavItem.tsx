@@ -1,5 +1,5 @@
 
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "../";
 
 import {
   ClipboardDocumentCheckIcon,
@@ -7,7 +7,7 @@ import {
   CalendarDaysIcon,
   BanknotesIcon,
   BeakerIcon,
-} from "@heroicons/react/24/solid";
+} from "../";
 const AsideNavItem = ({
   navItem,
   router,

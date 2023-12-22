@@ -25,12 +25,12 @@ export default async function handler(
           const newPerson = await userManager.createPerson(person, myheaders, serverConfig.basePath);
           if(newPerson)
           {
-            const password = generate({ length: 10, numbers: true });
+            const password = generate({ length: 10, numbers: true, uppercase: true, lowercase: true, symbols: false });
             const newUserData = {
                 username:user?.name as string,
                 person: newPerson.uuid,
                 password: password,                                                    
-                roles: ["8d94f852-c2cc-11de-8d13-0010c6dffd0f","8d94f280-c2cc-11de-8d13-0010c6dffd0f"], 
+                roles: ["8d94f852-c2cc-11de-8d13-0010c6dffd0f","8d94f280-c2cc-11de-8d13-0010c6dffd0f"],
             }
             const myheaders2 = await openmrsSessionManager.initializeSession({username:serverConfig.username, password:serverConfig.password, baseUrl: serverConfig.basePath});
            if(myheaders2)
@@ -39,6 +39,11 @@ export default async function handler(
             console.log(newUser, "newUser");
             if(newUser)
             {
+               
+              const newProvider = await userManager.createProvider(newPerson.uuid as string, myheaders2, serverConfig.basePath);
+              console.log(newProvider, "newProvider");
+              if(newProvider)
+              {
                 const userServerConfig = await prisma.userServerConfig.create({
                   data: {
                     user: {
@@ -52,13 +57,16 @@ export default async function handler(
                     username: newUser.username,
                     locationUUID: serverConfig.locationUuid,
                     userUUID: newUser.uuid as string,
-                    password: password
+                    password: password,
+                    personUUID: newPerson.uuid as string,
+                    providerUUID: newProvider.uuid as string,
                   }});
 
                 if(userServerConfig)
                 {
                     res.status(200).json({userServerConfig: userServerConfig});
                 }
+              }
             }
             res.status(400).json({error: 'Could not create user'})
            }

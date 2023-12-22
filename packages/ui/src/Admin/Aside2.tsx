@@ -2,7 +2,7 @@
 import {
   BriefcaseIcon,
 
-} from "@heroicons/react/24/solid";
+} from "../";
 
 import{ AsideNavItem} from "./AsideNavItem";
 const Aside2 = ({ router }: any) => {

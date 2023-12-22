@@ -61,6 +61,7 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
         },
       };
     }
+    console.log(userProfile)
         return {
             props: {
                 userProfile: userProfile,

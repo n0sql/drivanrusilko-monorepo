@@ -1,7 +1,7 @@
 import DrawerMenu from "./DrawerMenu";
 import SiteMenu from "./SiteMenu";
 import ProductsMenu from "./ProductsMenu";
-import { UserCircleIcon,XCircleIcon, ChevronLeftIcon } from "@heroicons/react/24/solid";
+import { UserCircleIcon,XCircleIcon, ChevronLeftIcon } from "../";
 
 import SmallDrawer from "./SmallDrawer";
 import {

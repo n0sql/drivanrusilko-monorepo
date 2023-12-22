@@ -115,7 +115,7 @@ export async function  searchUserByName(name: string, myHeaders: Headers,baseUrl
     }
 }
 
-export async function searchUserByUuid (uuid: string, myHeaders: Headers,baseUrl: string) {
+export async function searchUserByUuid (uuid: string, myHeaders: Headers, baseUrl: string) {
 
     var requestOptions = {
         method: 'GET',
@@ -167,4 +167,57 @@ export async function createUserFromPerson(userdata: any, myHeaders: Headers, ba
          console.log(error)
          return null;
    }
+}
+
+// To Create a provider, you need to specify below attributes in the request body. If you are not logged in to perform this action, a 401 Unauthorized status returned.
+
+// Attributes
+// Parameter	Type	Description
+// person	Person UUID	Target person who will be a provider for OpenMRS (required)
+// identifier	String	Value of the identifier.Identifier is used to virtually group providers in to groups (required)
+// attributes	Array[]: Attribute	List of provider attributes
+// retired	Boolean	Retired status for the provider.
+
+
+export async function createProvider(personuuid: any, myHeaders: Headers, baseUrl: string) {
+    const raw = JSON.stringify({
+        "person": personuuid,
+        "identifier":"doctor",
+        "attributes": [],
+        "retired": false
+    });
+    
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow' as RequestRedirect
+    };
+    
+    try {
+        const response = await fetch(`${baseUrl}/ws/rest/v1/provider`, requestOptions)
+        const result = await response.json();
+        console.log(result)
+        return result
+    } catch (error) {
+        console.log(error)
+        return null;
+    }
+}
+
+export async function searchProviderByPersonUuid(personuuid: any, myHeaders: Headers, baseUrl: string) {
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+    };
+    
+    try {
+        const response = await fetch(`${baseUrl}/ws/rest/v1/provider?person=${personuuid}`, requestOptions)
+        const result = await response.json();
+        console.log(result)
+        return result
+    } catch (error) {
+        console.log(error)
+        return null;
+    }
 }

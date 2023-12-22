@@ -1,13 +1,9 @@
-import { PrismaClient } from 'database'
+
 import bcrypt from "bcrypt";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { registerSchema } from "validation";
+import prisma from "../../../lib/db";
 
-const prisma = new PrismaClient(
-  {
-    datasourceUrl: process.env.DATABASE_URL,
-  }
-);
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from 'database'
+import { Prisma } from 'database'
 import NextAuth, {AuthOptions} from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -8,13 +8,8 @@ import { decode, encode } from "next-auth/jwt";
 import { getCookie, setCookie } from "cookies-next";
 import bcrypt from "bcrypt";
 import { NextApiRequest, NextApiResponse } from "next"
+import prisma from "../../../lib/db";
 
-
-const prisma = new PrismaClient(
-  {
-    datasourceUrl: process.env.DATABASE_URL,
-  }
-);
 
 export function authOptionsWrapper(req: NextApiRequest, res: NextApiResponse) {
   const isCredentialsCallback =

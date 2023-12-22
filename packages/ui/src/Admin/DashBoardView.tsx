@@ -1,5 +1,5 @@
 
-import { ArrowUpIcon } from "@heroicons/react/24/outline";
+import { ArrowUpIcon } from "../";
 const DashBoardView = () => {
   return (
     <main className="p-4  h-auto"> 

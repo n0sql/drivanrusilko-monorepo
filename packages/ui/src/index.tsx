@@ -63,3 +63,15 @@ export * from  "./ClinicProgramBuilder/ShippingForm";
 export * from "./input"
 export * from "./acceptterms"
 export * from "./grid"
+export {
+    BriefcaseIcon,
+    ClipboardDocumentCheckIcon,
+    UserGroupIcon,
+    CalendarDaysIcon,
+    BanknotesIcon,
+    BeakerIcon,
+    UserCircleIcon,XCircleIcon, ChevronLeftIcon,
+  
+  } from "@heroicons/react/24/solid";
+  
+  export { ChevronDownIcon, ArrowUpIcon } from "@heroicons/react/24/outline";

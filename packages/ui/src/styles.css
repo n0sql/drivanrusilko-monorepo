@@ -39,11 +39,6 @@
         }
       }
        
-      .mylist {
-        animation-name: slidein;
-        animation-duration: 0.3s;
-        animation-timing-function: ease-in-out;
-      }
       
       
       .mybtns{

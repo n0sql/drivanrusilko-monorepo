@@ -15,7 +15,6 @@ export default async function handler(
         {
             const location = await locationManager.checkParentLocation(myheaders, hospitalName as string, serverConfig.basePath);
             if (location) {
-              console.log(location)
                 res.status(200).json({location: location});
                
             }

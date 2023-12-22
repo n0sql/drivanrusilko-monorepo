@@ -28,6 +28,13 @@ try {
                         const openmrsuser = await userManager.searchUserByUuid(userServerConfig.userUUID, myheaders, serverConfig.basePath);
                         if(openmrsuser)
                         { 
+                            const provider = userServerConfig.providerUUID ? userServerConfig.providerUUID :  null;
+                             if(!provider)
+                             {
+                                    const newProvider = await userManager.createProvider(openmrsuser.person.uuid as string, myheaders, serverConfig.basePath);
+                                    await prisma.userServerConfig.update({where: {id: userServerConfig.id}, data: {providerUUID: newProvider.uuid as string, personUUID: openmrsuser.person.uuid as string}})
+                             }
+
                             res.status(200).json({user: openmrsuser});
                             
                         }

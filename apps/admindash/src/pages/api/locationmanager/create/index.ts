@@ -16,7 +16,6 @@ export default async function handler(
         if (myheaders)
         {
             const newLocation = await locationManager.createParentLocation(myheaders, location, location.name, serverConfig.basePath);
-            console.log(newLocation)
             if (newLocation) {
                 await prisma.serverConfig.update({where: {hospitalName: location.name}, data: {
                     locationUuid: newLocation.uuid,

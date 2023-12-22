@@ -99,6 +99,8 @@ model UserServerConfig {
   userUUID       String
   locationUUID   String
   password       String
+  personUUID     String?
+  providerUUID   String?
   user           User    @relation(fields: [userId], references: [id])
   serverConfig   ServerConfig @relation(fields: [serverConfigId], references: [id])
   @@index([userId], name: "userId")
