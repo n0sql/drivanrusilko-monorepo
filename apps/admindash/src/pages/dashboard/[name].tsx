@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
     const hospitalName = context.query.name as string;
     const session = await getServerSession(context.req, context.res);
    
-    if (!(session)) { 
+    if (!(session)) {
       return {
         redirect: {
           destination: "/",
@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
         },
       };
     }
-    const  userLocation = await userLocationResponse.json();
+    const userLocation = await userLocationResponse.json();
     if (!(userLocation)) {
       return {
         redirect: {

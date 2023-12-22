@@ -15,10 +15,8 @@ function Header ():JSX.Element {
   }, []);
     const {data:session} = useSession();
       return(  
-        
-        
       <nav
-          className={`${sofi.className} sticky top-0 z-10 block w-full max-w-full px-4 py-2 bg-neutral-50  text-neutral-600 shadow-lg dark:bg-neutral-700 dark:text-neutral-300 dark:shadow-black/5 rounded-none shadow-md h-max bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-2 `}
+          className={`${sofi.className} sticky top-0 z-10 block w-full max-w-full px-4 py-2 bg-neutral-50  text-neutral-600 shadow-lg dark:bg-[#222030] dark:border-b-[#222030]/75 dark:text-gray-100 dark:shadow-black/4 rounded-none shadow-md h-max bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-2 `}
           id="navbarSupportedContentX"
           data-te-navbar-ref
         ><div className="flex items-center justify-between text-blue-gray-900">
@@ -26,9 +24,10 @@ function Header ():JSX.Element {
             <a
               data-te-ripple-init
               data-te-ripple-color="light"
-              href="https://drivan.d3gmqotpidrz95.amplifyapp.com/"
+              href="/"
               className=" items-center  mr-4 lock py-2 px-4 flex text-primary font-bold text-xl  cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700"
             >
+        
               <img src="/drivanlogo.svg" className="mr-3 h-8" alt="logo" />
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                 Drivanrusilko Admin
@@ -36,6 +35,7 @@ function Header ():JSX.Element {
             </a>
           </div>
           <div className="flex items-center gap-4">
+            
           {
             session && (
               <div className="hidden mr-4 lg:block">
@@ -54,14 +54,36 @@ function Header ():JSX.Element {
               </div>
             ) 
 
+            
+
           }
-               <div className="flex items-center gap-x-1">
+          <div className="flex items-center gap-x-1">
+           {
+            session ? ( 
             <button
               onClick={() => signOut()}
-              className="hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+              className=" select-none rounded-lg dark:bg-gray-100  bg-[#222030] rounded-lg dark:text-[#222030] py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
               type="button">
               <span>Log Out</span>
-            </button>
+            </button>) :
+            ( 
+              <div className="flex items-center gap-x-1">
+            <a
+              href="/auth"
+              className=" select-none rounded-lg dark:bg-gray-100 bg-[#222030] rounded-lg dark:text-[#222030] py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+              type="button">
+              <span>Log In</span>
+            </a>
+            <a
+            type='button'
+              href="/auth"
+              className=" select-none dark:bg-gray-100 bg-[#222030] rounded-lg dark:text-[#222030] py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+              >
+              <span>SignUp</span>
+            </a>
+            </div>
+            )
+           }
           </div>
           <button
             onClick={() => setOpenNav(!openNav)}

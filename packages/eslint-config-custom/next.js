@@ -98,6 +98,10 @@ module.exports = {
     "@typescript-eslint/no-unnecessary-type-assertion": "off",
     "turbo/no-undeclared-env-vars": "off",
     "@typescript-eslint/require-await": "off",
+    "jsx-a11y/img-redundant-alt": "off",
+    "jsx-a11y/alt-text" : "off",
+    "react/no-unescaped-entities": "off",
+    "import/no-named-as-defaults": "off",
 
   },
 };
