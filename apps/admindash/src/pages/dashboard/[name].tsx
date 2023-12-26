@@ -9,7 +9,8 @@ export default function LocationDashboard ({userProfile, userLocation}: InferGet
      <div className="overflow-hidden w-[80vw]">
 <DashBoardView />
      </div>
-     ) 
+     )
+     return <div>loading...</div>
  }
 
 export const getServerSideProps: GetServerSideProps = async (context:GetServerSidePropsContext) => {
@@ -19,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
     if (!(session)) {
       return {
         redirect: {
-          destination: "/",
+          destination: "/auth",
           permanent: false,
         },
       };
@@ -61,7 +62,7 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
         },
       };
     }
-    console.log(userProfile)
+    console.log(userProfile);
         return {
             props: {
                 userProfile: userProfile,

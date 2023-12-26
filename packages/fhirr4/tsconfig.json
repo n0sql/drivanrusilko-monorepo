@@ -1,14 +1,24 @@
-{
+
+ {
     "compilerOptions": {
+      "composite": false,
+      "declaration": true,
+      "declarationMap": true,
       "esModuleInterop": true,
       "forceConsistentCasingInFileNames": true,
+      "allowImportingTsExtensions": true,
+      "noEmit": true,
+      "inlineSources": false,
       "isolatedModules": true,
-      "module": "ESNext",
-      "moduleResolution": "Bundler",
+      "moduleResolution": "node",
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
       "preserveWatchOutput": true,
       "skipLibCheck": true,
-      "noEmit": true,
-      "strict": true
+      "strict": true,
+      "strictNullChecks": true,
+      "types": ["./global.d.ts", "node"],
     },
     "exclude": ["node_modules"]
   }
+

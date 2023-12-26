@@ -3,6 +3,7 @@ import { openmrsSessionManager,  userManager} from 'fhirr4';
 import { generate } from 'generate-password';
 import getServerSession from '../../../../lib/getServerSession';
 import prisma from "../../../../lib/db";
+
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
@@ -15,15 +16,26 @@ export default async function handler(
     if (!user) {
         res.status(401).json({error: 'Not authorized'})
     }
-    const {locationName, person} = JSON.parse(req.body)
-    const serverConfig  = await prisma.serverConfig.findUnique({where: {hospitalName: locationName}})
-     if ( serverConfig?.username && serverConfig?.password && serverConfig?.locationUuid)
+    const {locationName, person} = JSON.parse(req.body);
+    if (!locationName || !person) {
+        res.status(400).json({error: 'Missing data'})
+    };
+
+    const serverConfig  = await prisma.serverConfig.findUnique({where: {hospitalName: locationName}});
+     if (serverConfig?.locationUuid)
      {
         const myheaders = await openmrsSessionManager.initializeSession({username:serverConfig.username, password:serverConfig.password, baseUrl: serverConfig.basePath});
-        if (myheaders)
+        if (!myheaders)
+        {
+            res.status(400).json({error: 'Could not initialize session'});
+        }
+        else
         {
           const newPerson = await userManager.createPerson(person, myheaders, serverConfig.basePath);
-          if(newPerson)
+          if (!newPerson) {
+            res.status(400).json({error: 'Could not create person'});
+          }
+          else
           {
             const password = generate({ length: 10, numbers: true, uppercase: true, lowercase: true, symbols: false });
             const newUserData = {
@@ -35,44 +47,57 @@ export default async function handler(
             const myheaders2 = await openmrsSessionManager.initializeSession({username:serverConfig.username, password:serverConfig.password, baseUrl: serverConfig.basePath});
            if(myheaders2)
            {
-            const newUser = await userManager.createUserFromPerson(newUserData, myheaders2, serverConfig.basePath);
-            console.log(newUser, "newUser");
-            if(newUser)
-            {
-               
-              const newProvider = await userManager.createProvider(newPerson.uuid as string, myheaders2, serverConfig.basePath);
-              console.log(newProvider, "newProvider");
-              if(newProvider)
+              const newUser = await userManager.createUserFromPerson(newUserData, myheaders2, serverConfig.basePath);
+              if(newUser)
               {
-                const userServerConfig = await prisma.userServerConfig.create({
-                  data: {
-                    user: {
-                      connect: {
-                        id: user?.id
-                      }}, 
-                    serverConfig: {
-                      connect: {
-                        id: serverConfig.id
-                      }},
-                    username: newUser.username,
-                    locationUUID: serverConfig.locationUuid,
-                    userUUID: newUser.uuid as string,
-                    password: password,
-                    personUUID: newPerson.uuid as string,
-                    providerUUID: newProvider.uuid as string,
-                  }});
-
-                if(userServerConfig)
+                
+                const newProvider = await userManager.createProvider(newPerson.uuid as string, myheaders2, serverConfig.basePath);
+                if(newProvider)
                 {
-                    res.status(200).json({userServerConfig: userServerConfig});
+                  const userServerConfig = await prisma.userServerConfig.create({
+                    data: {
+                      user: {
+                        connect: {
+                          id: user?.id
+                        }}, 
+                      serverConfig: {
+                        connect: {
+                          id: serverConfig.id
+                        }},
+                      username: newUser.username,
+                      locationUUID: serverConfig.locationUuid,
+                      userUUID: newUser.uuid as string,
+                      password: password,
+                      personUUID: newPerson.uuid as string,
+                      providerUUID: newProvider.uuid as string,
+                    }});
+
+                  if(userServerConfig)
+                  {
+                      res.status(200).json({userServerConfig: userServerConfig});
+                  }
+                  else{
+                    res.status(200).json({warning: 'Could not create user server config'});
+                  }
+                }
+                else{
+                  res.status(200).json({warning: 'Could not create provider'});
                 }
               }
-            }
-            res.status(400).json({error: 'Could not create user'})
+              else{
+                res.status(400).json({error: 'Could not create user'});
+              }
            }
-           res.status(400).json({error: 'Could not create user'})
+            else {
+           res.status(400).json({error: 'Could not initialize session  for user creation'});
+            }
           }
+         
+       }
+     
+     } 
+    else 
+     {
+      res.status(400).json({error: 'No server config found'});
      }
-     res.status(400).json({error: 'Could not create user or provider'})
-  }
 }

@@ -1,6 +1,14 @@
 
-import { encode, decode } from 'js-base64';
+import { encode } from 'js-base64';
 
+/**
+ * Initialize a session with the OpenMRS REST API.
+ * @param {Object} attributes - The attributes of the sesssion initialization.
+ * @param {string} attributes.username - The username of the user to login.
+ * @param {string} attributes.password - The password of the user to login.
+ * @param {string} attributes.baseUrl - The base URL for the API.
+ * @returns {Promise<Headers | undefined | null>} A promise that resolves to the headers of the session.
+ */
 export async function initializeSession({
     username,
     password,
@@ -36,7 +44,12 @@ export async function initializeSession({
 }
 
 
-
+/**
+ * End the current session.
+ * @param {Headers} myHeaders - The headers for the HTTP request.
+ * @param {string} baseUrl - The base URL for the API.
+ * @returns A promise that resolves to the created location.
+ */
 export async function endSession(myHeaders: Headers, baseUrl: string){
 
     const requestOptions = {

@@ -14,20 +14,32 @@ try {
     const serverConfig = await prisma.serverConfig.findUnique({where: {hospitalName: hospitalName as string}})
       if(serverConfig?.locationUuid)
       {
-          const user = await prisma.user.findUnique({where: {email: email as string}})
-          if(user)
+          const user = await prisma.user.findUnique({
+            where: {email: email as string},
+            include: {userserverConfigs: true}
+          });
+          if (!user) {
+            res.status(400).json({error: 'No user found'})
+          }
+         else
           {
-              const userServerConfig = await prisma.userServerConfig.findFirst({where: {userId: user.id, serverConfigId: serverConfig.id}});
-              
-              if(userServerConfig)
+              const userServerConfig = user.userserverConfigs.find((userServerConfig) => userServerConfig.serverConfigId === serverConfig.id);
+               if (!userServerConfig) {
+                res.status(400).json({error: 'No user server config found'})
+                }
+              else
               {
                     const myheaders = await openmrsSessionManager.initializeSession({username:userServerConfig.username, password:userServerConfig.password, baseUrl: serverConfig.basePath});
-                    if (myheaders)
+                     if (!myheaders)
+                    {
+                        res.status(400).json({error: 'Could not initialize session'});
+                    }
+                    else
                     {
 
                         const openmrsuser = await userManager.searchUserByUuid(userServerConfig.userUUID, myheaders, serverConfig.basePath);
                         if(openmrsuser)
-                        { 
+                        {
                             const provider = userServerConfig.providerUUID ? userServerConfig.providerUUID :  null;
                              if(!provider)
                              {
@@ -43,20 +55,17 @@ try {
                             
                         }
                     }
-                    else {
-                        res.status(400).json({error: 'Could not initialize session'});
-                        
-                    }
+                    
                   
               }
-              else {
-                  res.status(400).json({error: 'No user server config found'})
-              }
+              
           } 
+            
       }
-      else {
-          res.status(400).json({error: 'No location uuid found please create a location first'})
-      }
+      else  
+      {
+        res.status(400).json({error: 'No server config found'});
+    }
     
 } catch (error) {
     res.status(400).json({error: error})
