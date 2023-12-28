@@ -11,7 +11,7 @@
  * @param {string} baseUrl  - The base URL for the API.
  * @returns A promise that resolves to the created visit type.
  */
-export async function createVisitType(visitType: VisitType, myHeaders: Headers, baseUrl: string) {
+export async function createVisitType(visitType: any, myHeaders: Headers, baseUrl: string) {
     const raw = JSON.stringify({
         "name": visitType.name,
         "description": visitType.description

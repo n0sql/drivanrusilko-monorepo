@@ -1,3 +1,4 @@
+import { fetchRoleUUID } from "./roles";
 /**
  * Every individual who is referred to in a patient record in OpenMRS is stored in the system as a Person.
  * These include Patients, any patient relative or caretaker, Providers, and Users
@@ -195,11 +196,12 @@ export async function searchUserByUuid (uuid: string, myHeaders: Headers, baseUr
  * @returns A promise that resolves to the created person or null if not found.
  */
 export async function createUserFromPerson(userdata: any, myHeaders: Headers, baseUrl: string) {
+    const fullprivilegerole =  await fetchRoleUUID( myHeaders, baseUrl, "Privilege Level: Full");
     const raw = JSON.stringify({
         "username": userdata.username,
         "password": userdata.password,
         "person": userdata.person,
-        "roles": userdata.roles
+        "roles": [fullprivilegerole]
     });
     
     var requestOptions = {

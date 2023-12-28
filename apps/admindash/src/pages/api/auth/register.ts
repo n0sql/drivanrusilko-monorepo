@@ -31,14 +31,14 @@ export default async function handler(
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
-
+    const isFirstUser = await prisma.serverConfig.count();
     await prisma.$transaction(async (tx) => {
       const { id } = await tx.user.create({
         data: {
           email,
           name: username,
           password: passwordHash,
-          role: "ADMIN",
+          role: isFirstUser === 0 ? "ADMIN" : "STAFF"
         },
       });
 

@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../../lib/db";
+import { systemSettingsManager, openmrsSessionManager } from "fhirr4";
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
@@ -31,8 +32,18 @@ export default async function handler(
                  id: user?.id as string
              }
          }
-     
      }});
+     const session = await openmrsSessionManager.initializeSession({username:"admin", password:"Admin123", baseUrl:serverData.basePath});
+     if (session) {
+      const config = {
+         name: serverData.hospitalName,
+         description: serverData.hospitalName,
+         implementationId: serverData.hospitalName + "implementation",
+         passphrase: serverData.hospitalName + "_passphrase",
+      }
+      await systemSettingsManager.updateImplementationConfig(session, serverData.basePath, config);
+      await systemSettingsManager.updateApiSettings(session, serverData.basePath);
+   }
         res.status(200).json({serverConfig: newServerConfig})
      }
      } catch (error) {

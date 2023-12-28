@@ -178,6 +178,7 @@ export async function getLocationByUuid (myHeaders: Headers, locationUuid:string
 
    try {
     const locationResponse = await fetch(`${baseUrl}/ws/rest/v1/location/${locationUuid}`, requestOptions);
+    console.log(locationResponse)
     if (locationResponse.status > 199 && locationResponse.status < 300) {
         const locationResult = await locationResponse.json();
         return locationResult;

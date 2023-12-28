@@ -1,4 +1,14 @@
 /**
+ * @file roles.ts
+ * @summary Methods for interacting with the OpenMRS REST API to manage roles.
+ * @description This file contains methods for interacting with the OpenMRS REST API to manage roles.
+ * 
+ */
+
+
+
+
+/**
  * fetch all roles
  * A Role represents a group of privileges in the system.
  * Roles may inherit privileges from other roles,
@@ -15,7 +25,7 @@ export async function getAllRoles(myHeaders: Headers, baseUrl: string) {
         redirect: 'follow' as RequestRedirect
     };
     try {
-        const response = await fetch(`${baseUrl}/ws/rest/v1/role`, requestOptions);
+        const response = await fetch(`${baseUrl}/ws/rest/v1/role?v=default`, requestOptions);
         if (response.status > 199 && response.status < 300) {
             const result = await response.json();
             return result;
@@ -45,7 +55,7 @@ export async function getAllPrivileges (myHeaders: Headers, baseUrl: string) {
         redirect: 'follow' as RequestRedirect
     };
     try {
-        const response = await fetch(`${baseUrl}/ws/rest/v1/privilege`, requestOptions);
+        const response = await fetch(`${baseUrl}/ws/rest/v1/privilege?v=default`, requestOptions);
         if (response.status > 199 && response.status < 300) {
             const result = await response.json();
             return result;
@@ -55,4 +65,24 @@ export async function getAllPrivileges (myHeaders: Headers, baseUrl: string) {
         console.log(error);
         return null;
     }
+}
+
+/**
+ * fetch role uuid by role name
+ * 
+ * @param {Headers} myHeaders  - The headers for the HTTP request.
+ * @param {String} baseUrl  - The base URL for the API.
+ * @param {String} providerRoleName  - The name of the role to search for.
+ * @returns  A promise that resolves to the created person or null if not found.
+ */
+
+
+export async function fetchRoleUUID (myHeaders: Headers, baseUrl: string, providerRoleName: string) {
+    const allRoles = await getAllRoles(myHeaders, baseUrl);
+    const roleUUID = allRoles.results.find((role: any) => role.name === providerRoleName).uuid;
+    if (roleUUID) {
+        return roleUUID;
+    }
+    return null;
+
 }

@@ -30,6 +30,6 @@ export default async function handler(
   }
   else  
   {
-    res.status(301).redirect("/server-config")
+    res.status(400).json({error: 'Could not find location'});
 }
   }

@@ -138,4 +138,24 @@ export async function updateImplementationConfig(myHeaders: Headers, baseUrl: st
             return null;
         }
   
-  }
+}
+
+
+/**
+ * updateApiSettings - Updates the API settings to allow for more than 100 max and 50 default results to 10000 each.
+ * @param myHeaders  - The headers for the HTTP request.
+ * @param baseUrl - The base URL for the API.
+ * @returns A promise that resolves to the created person or null if not found.
+ */
+
+
+export async function updateApiSettings(myHeaders: Headers, baseUrl: string) {
+    const properties = ["webservices.rest.maxResultsAbsolute", "webservices.rest.maxResultsDefault"];
+    const values = ["10000", "10000"];
+    const updatedSystemSettings = await Promise.all(properties.map((property, index) => updateSystemSettings(myHeaders, baseUrl, property, values[index])));
+
+    if (updatedSystemSettings) {
+       return true;
+        }
+        return false;
+}

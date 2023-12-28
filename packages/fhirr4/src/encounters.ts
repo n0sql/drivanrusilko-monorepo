@@ -39,15 +39,14 @@ export async function createEncounterType(encounterType: any, myHeaders: Headers
 
 
 /**
- * Quickly filter encounter types with given query parameters.
+ * fetch all encounter types
  * 
- * @param {string} query - The query parameters to filter with.
  * @param {Headers} myHeaders - The headers for the HTTP request.
  * @param {string} baseUrl - The base URL for the API.
  * @returns {Promise<any>} A promise that resolves to the filtered encounter types.
  *
  */
-export async function getEncounterTypes(query: string, myHeaders: Headers, baseUrl: string): Promise<any> {
+export async function getAllEncounterTypes( myHeaders: Headers, baseUrl: string): Promise<any> {
     const requestOptions = {
         method: 'GET',
         headers: myHeaders,
@@ -55,7 +54,7 @@ export async function getEncounterTypes(query: string, myHeaders: Headers, baseU
     };
 
     try {
-        const response = await fetch(`${baseUrl}/ws/rest/v1/encountertype${query}`, requestOptions);
+        const response = await fetch(`${baseUrl}/ws/rest/v1/encountertype?v=default`, requestOptions);
         if (response.status > 199 && response.status < 300) {
             const result = await response.json();
             return result.results
@@ -67,6 +66,31 @@ export async function getEncounterTypes(query: string, myHeaders: Headers, baseU
     }
 }
 
+
+/**
+ * Quickly filter encounter types with given query parameters.
+ * 
+ * @param {string} query - The query parameters to filter with.
+ * @param {Headers} myHeaders - The headers for the HTTP request.
+ * @param {string} baseUrl - The base URL for the API.
+ * @returns {Promise<any>} A promise that resolves to the filtered encounter types.
+ *
+ */
+export async function getEncounterType(query: string, myHeaders: Headers, baseUrl: string): Promise<any> {
+    const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow' as RequestRedirect
+    };
+ const allEncounterTypes = await getAllEncounterTypes(myHeaders, baseUrl);
+
+ const encounterType = allEncounterTypes.find((encounterType: any) => encounterType.name === query);
+ if (encounterType) {
+     return encounterType;
+ }
+ return null;
+    
+}
 
 
 /**
